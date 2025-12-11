@@ -101,11 +101,11 @@ export default function HeroSectionV3({
         .grainy-bar {
           background: linear-gradient(
             90deg,
-            rgba(28, 28, 30, 0.92) 0%,
-            rgba(35, 35, 38, 0.9) 20%,
-            rgba(30, 30, 33, 0.88) 50%,
-            rgba(35, 35, 38, 0.9) 80%,
-            rgba(28, 28, 30, 0.92) 100%
+            rgba(0, 0, 0, 0.7) 0%,
+            rgba(0, 0, 0, 0.6) 20%,
+            rgba(0, 0, 0, 0.55) 50%,
+            rgba(0, 0, 0, 0.6) 80%,
+            rgba(0, 0, 0, 0.7) 100%
           );
           position: relative;
           overflow: hidden;
