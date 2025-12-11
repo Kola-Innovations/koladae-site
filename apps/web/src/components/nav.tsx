@@ -17,7 +17,7 @@ function MainNav() {
       <Link to="/" className="nav-link">
         Shop
       </Link>
-      <Link to="/" className="nav-link">
+      <Link to="/press-kit" className="nav-link">
         Press Kit
       </Link>
     </nav>
