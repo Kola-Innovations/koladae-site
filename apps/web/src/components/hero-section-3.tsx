@@ -216,6 +216,153 @@ export default function HeroSectionV3({
           100% { transform: translate(0, 0); }
         }
 
+        /* VHS Tracking lines - horizontal bands that move */
+        .vhs-tracking {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          pointer-events: none;
+          z-index: 8;
+          overflow: hidden;
+        }
+
+        .vhs-line {
+          position: absolute;
+          left: 0;
+          width: 100%;
+          height: 3px;
+          background: linear-gradient(
+            90deg,
+            transparent 0%,
+            rgba(255, 255, 255, 0.1) 10%,
+            rgba(255, 255, 255, 0.3) 50%,
+            rgba(255, 255, 255, 0.1) 90%,
+            transparent 100%
+          );
+          animation: vhsTrack 2s linear infinite;
+        }
+
+        @keyframes vhsTrack {
+          0% { transform: translateY(-100vh); }
+          100% { transform: translateY(100vh); }
+        }
+
+        /* VHS Color bleed / RGB separation */
+        .vhs-color-bleed {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          pointer-events: none;
+          z-index: 7;
+          mix-blend-mode: screen;
+          opacity: 0.15;
+        }
+
+        .vhs-color-bleed::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: -2px;
+          width: 100%;
+          height: 100%;
+          background: rgba(255, 0, 0, 0.3);
+          animation: colorShift 0.1s steps(2) infinite;
+        }
+
+        .vhs-color-bleed::after {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 2px;
+          width: 100%;
+          height: 100%;
+          background: rgba(0, 255, 255, 0.3);
+          animation: colorShift 0.1s steps(2) infinite reverse;
+        }
+
+        @keyframes colorShift {
+          0% { transform: translateX(0); }
+          50% { transform: translateX(2px); }
+          100% { transform: translateX(-1px); }
+        }
+
+        /* VHS Tape strips - horizontal bands of interference */
+        .vhs-strip {
+          position: absolute;
+          left: 0;
+          width: 100%;
+          background: linear-gradient(
+            180deg,
+            transparent 0%,
+            rgba(255, 255, 255, 0.05) 20%,
+            rgba(255, 255, 255, 0.15) 40%,
+            rgba(100, 100, 100, 0.3) 50%,
+            rgba(255, 255, 255, 0.15) 60%,
+            rgba(255, 255, 255, 0.05) 80%,
+            transparent 100%
+          );
+          animation: stripWobble 0.3s ease-in-out infinite;
+        }
+
+        @keyframes stripWobble {
+          0%, 100% { transform: scaleX(1) translateX(0); }
+          25% { transform: scaleX(1.02) translateX(-5px); }
+          50% { transform: scaleX(0.98) translateX(5px); }
+          75% { transform: scaleX(1.01) translateX(-3px); }
+        }
+
+        /* VHS Glitch flicker */
+        .vhs-glitch {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          pointer-events: none;
+          z-index: 9;
+          background: transparent;
+          animation: vhsFlicker 0.15s steps(1) infinite;
+        }
+
+        @keyframes vhsFlicker {
+          0% { opacity: 0; }
+          5% { opacity: 0.1; background: white; }
+          10% { opacity: 0; }
+          15% { opacity: 0.05; background: white; }
+          20% { opacity: 0; }
+          80% { opacity: 0; }
+          85% { opacity: 0.08; background: white; }
+          90% { opacity: 0; }
+          100% { opacity: 0; }
+        }
+
+        /* Horizontal hold issue - screen roll effect */
+        .vhs-roll {
+          position: absolute;
+          left: 0;
+          width: 100%;
+          height: 30px;
+          background: linear-gradient(
+            180deg,
+            transparent 0%,
+            rgba(0, 0, 0, 0.8) 30%,
+            black 50%,
+            rgba(0, 0, 0, 0.8) 70%,
+            transparent 100%
+          );
+          animation: rollBar 3s linear infinite;
+          z-index: 10;
+        }
+
+        @keyframes rollBar {
+          0% { top: -30px; }
+          100% { top: 100%; }
+        }
+
         /* Spinning vinyl record */
         .vinyl {
           position: absolute;
@@ -732,6 +879,38 @@ export default function HeroSectionV3({
               ))}
             </div>
 
+            {/* VHS Effects */}
+            {/* Color bleed / RGB separation */}
+            <div className="vhs-color-bleed" />
+
+            {/* Tracking lines moving down the screen */}
+            <div className="vhs-tracking">
+              <div className="vhs-line" style={{ animationDelay: "0s" }} />
+              <div className="vhs-line" style={{ animationDelay: "0.5s" }} />
+              <div className="vhs-line" style={{ animationDelay: "1s" }} />
+              <div className="vhs-line" style={{ animationDelay: "1.5s" }} />
+            </div>
+
+            {/* VHS tape strips - interference bands */}
+            <div
+              className="vhs-strip"
+              style={{ top: "15%", height: "40px", animationDelay: "0s" }}
+            />
+            <div
+              className="vhs-strip"
+              style={{ top: "45%", height: "25px", animationDelay: "0.15s" }}
+            />
+            <div
+              className="vhs-strip"
+              style={{ top: "70%", height: "50px", animationDelay: "0.08s" }}
+            />
+
+            {/* Random white flicker */}
+            <div className="vhs-glitch" />
+
+            {/* Horizontal hold / roll bar */}
+            <div className="vhs-roll" />
+
             {/* Vinyl Records */}
             {VINYLS.map((vinyl) => (
               <div
@@ -773,7 +952,6 @@ export default function HeroSectionV3({
                 <div className="butterfly-body" />
               </div>
             ))}
-
           </motion.div>
         )}
       </AnimatePresence>
@@ -792,7 +970,6 @@ export default function HeroSectionV3({
 
       {/* Film Grain */}
       <div className="film-grain" />
-
 
       {/* Content Container */}
       <div
@@ -958,7 +1135,9 @@ export default function HeroSectionV3({
                     stroke="rgba(255, 255, 255, 0.8)"
                     strokeWidth="1"
                     aria-hidden="true"
-                    style={{ animation: "arrowPulseLeft 1s ease-in-out infinite" }}
+                    style={{
+                      animation: "arrowPulseLeft 1s ease-in-out infinite",
+                    }}
                   >
                     <title>Pre-save arrow</title>
                     <path d="M5 12h14M12 5l7 7-7 7" />
@@ -995,7 +1174,9 @@ export default function HeroSectionV3({
                     stroke="rgba(255, 255, 255, 0.8)"
                     strokeWidth="1"
                     aria-hidden="true"
-                    style={{ animation: "arrowPulseRight 1s ease-in-out infinite" }}
+                    style={{
+                      animation: "arrowPulseRight 1s ease-in-out infinite",
+                    }}
                   >
                     <title>Pre-save arrow</title>
                     <path d="M19 12H5M12 19l-7-7 7-7" />
