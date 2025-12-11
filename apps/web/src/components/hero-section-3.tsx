@@ -1,6 +1,12 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import videoSrc from "@/videos/ye-ye-ye.mp4";
+import video1 from "@/videos/ye-ye-ye.mp4";
+import video2 from "@/videos/yea-lean-with-it.mp4";
+import video3 from "@/videos/intro-dimsum.mp4";
+
+const VIDEO_SOURCES = [video1, video2, video3];
+const VIDEO_DURATION = 8000; // 8 seconds per video
+const STATIC_DURATION = 2000; // 2 seconds of static screen
 
 interface HeroSectionV3Props {
   artistName?: string;
@@ -24,6 +30,9 @@ export default function HeroSectionV3({
   const [loaded, setLoaded] = useState(false);
   const [barsReady, setBarsReady] = useState(false);
   const [email, setEmail] = useState("");
+  const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
+  const [showStatic, setShowStatic] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     setLoaded(true);
@@ -31,6 +40,32 @@ export default function HeroSectionV3({
     const timer = setTimeout(() => setBarsReady(true), 1200);
     return () => clearTimeout(timer);
   }, []);
+
+  // Video carousel with static screen transition
+  useEffect(() => {
+    const cycleVideo = () => {
+      const isLastVideo = currentVideoIndex === VIDEO_SOURCES.length - 1;
+
+      if (isLastVideo) {
+        // After last video, show static screen
+        setShowStatic(true);
+        setTimeout(() => {
+          setShowStatic(false);
+          setCurrentVideoIndex(0);
+        }, STATIC_DURATION);
+      } else {
+        // Brief static flash between videos
+        setShowStatic(true);
+        setTimeout(() => {
+          setShowStatic(false);
+          setCurrentVideoIndex((prev) => prev + 1);
+        }, 300); // Quick flash between videos
+      }
+    };
+
+    const timer = setTimeout(cycleVideo, VIDEO_DURATION);
+    return () => clearTimeout(timer);
+  }, [currentVideoIndex]);
 
   useEffect(() => {
     let timeoutId: ReturnType<typeof setTimeout>;
@@ -83,6 +118,98 @@ export default function HeroSectionV3({
           z-index: 30;
           opacity: 0.1;
           background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* TV Static Screen */
+        .tv-static {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: black;
+          z-index: 5;
+        }
+
+        .tv-static::before {
+          content: '';
+          position: absolute;
+          top: -50%;
+          left: -50%;
+          width: 200%;
+          height: 200%;
+          background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='staticNoise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' seed='15' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23staticNoise)'/%3E%3C/svg%3E");
+          animation: staticMove 0.1s steps(8) infinite;
+          opacity: 0.4;
+        }
+
+        /* Scanlines for TV effect */
+        .tv-static::after {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: repeating-linear-gradient(
+            0deg,
+            rgba(0, 0, 0, 0.15),
+            rgba(0, 0, 0, 0.15) 1px,
+            transparent 1px,
+            transparent 2px
+          );
+          pointer-events: none;
+        }
+
+        @keyframes staticMove {
+          0% { transform: translate(0, 0); }
+          10% { transform: translate(-5%, -5%); }
+          20% { transform: translate(5%, 5%); }
+          30% { transform: translate(-3%, 3%); }
+          40% { transform: translate(3%, -3%); }
+          50% { transform: translate(-5%, 2%); }
+          60% { transform: translate(5%, -4%); }
+          70% { transform: translate(-2%, -2%); }
+          80% { transform: translate(4%, 4%); }
+          90% { transform: translate(-4%, 3%); }
+          100% { transform: translate(0, 0); }
+        }
+
+        /* Floating particles */
+        .particles {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          overflow: hidden;
+          z-index: 6;
+        }
+
+        .particle {
+          position: absolute;
+          width: 2px;
+          height: 2px;
+          background: rgba(255, 255, 255, 0.6);
+          border-radius: 50%;
+          animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+          0%, 100% {
+            transform: translateY(0) translateX(0);
+            opacity: 0;
+          }
+          10% {
+            opacity: 1;
+          }
+          90% {
+            opacity: 1;
+          }
+          100% {
+            transform: translateY(-100px) translateX(20px);
+            opacity: 0;
+          }
         }
 
         /* Vignette overlay */
@@ -357,16 +484,55 @@ export default function HeroSectionV3({
       `}</style>
 
       {/* Video Background */}
-      <video
-        autoPlay
-        loop
-        muted
-        playsInline
-        className="absolute inset-0 h-full w-full object-cover"
-        style={{ zIndex: 1 }}
-      >
-        <source src={videoSrc} type="video/mp4" />
-      </video>
+      <AnimatePresence mode="wait">
+        {!showStatic && (
+          <motion.video
+            key={currentVideoIndex}
+            ref={videoRef}
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="absolute inset-0 h-full w-full object-cover"
+            style={{ zIndex: 1 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+          >
+            <source src={VIDEO_SOURCES[currentVideoIndex]} type="video/mp4" />
+          </motion.video>
+        )}
+      </AnimatePresence>
+
+      {/* TV Static Screen */}
+      <AnimatePresence>
+        {showStatic && (
+          <motion.div
+            className="tv-static"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.1 }}
+          >
+            {/* Floating particles */}
+            <div className="particles">
+              {Array.from({ length: 20 }).map((_, i) => (
+                <div
+                  key={i}
+                  className="particle"
+                  style={{
+                    left: `${Math.random() * 100}%`,
+                    top: `${Math.random() * 100}%`,
+                    animationDelay: `${Math.random() * 3}s`,
+                    animationDuration: `${2 + Math.random() * 2}s`,
+                  }}
+                />
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Dark Overlay */}
       <div
