@@ -5,8 +5,32 @@ import video2 from "@/videos/yea-lean-with-it.mp4";
 import video3 from "@/videos/intro-dimsum.mp4";
 
 const VIDEO_SOURCES = [video1, video2, video3];
-const VIDEO_DURATION = 8000; // 8 seconds per video
+const VIDEO_DURATION = 4000; // 8 seconds per video
 const STATIC_DURATION = 2000; // 2 seconds of static screen
+
+// Pre-generated particle positions (static values to avoid re-renders)
+const PARTICLES = [
+  { id: "p1", left: 12, top: 45, delay: 0.2, duration: 2.5 },
+  { id: "p2", left: 87, top: 23, delay: 1.1, duration: 3.2 },
+  { id: "p3", left: 34, top: 78, delay: 0.8, duration: 2.8 },
+  { id: "p4", left: 56, top: 12, delay: 2.3, duration: 3.5 },
+  { id: "p5", left: 91, top: 67, delay: 0.5, duration: 2.2 },
+  { id: "p6", left: 23, top: 34, delay: 1.7, duration: 3.1 },
+  { id: "p7", left: 67, top: 89, delay: 2.8, duration: 2.6 },
+  { id: "p8", left: 45, top: 56, delay: 0.3, duration: 3.8 },
+  { id: "p9", left: 78, top: 41, delay: 1.9, duration: 2.4 },
+  { id: "p10", left: 8, top: 92, delay: 2.1, duration: 3.3 },
+  { id: "p11", left: 52, top: 18, delay: 0.9, duration: 2.9 },
+  { id: "p12", left: 29, top: 63, delay: 1.4, duration: 3.6 },
+  { id: "p13", left: 83, top: 37, delay: 2.6, duration: 2.3 },
+  { id: "p14", left: 41, top: 84, delay: 0.6, duration: 3.4 },
+  { id: "p15", left: 96, top: 52, delay: 1.2, duration: 2.7 },
+  { id: "p16", left: 15, top: 29, delay: 2.4, duration: 3.0 },
+  { id: "p17", left: 63, top: 71, delay: 0.4, duration: 3.7 },
+  { id: "p18", left: 38, top: 8, delay: 1.6, duration: 2.1 },
+  { id: "p19", left: 74, top: 95, delay: 2.9, duration: 3.9 },
+  { id: "p20", left: 19, top: 47, delay: 1.0, duration: 2.5 },
+];
 
 interface HeroSectionV3Props {
   artistName?: string;
@@ -59,7 +83,7 @@ export default function HeroSectionV3({
         setTimeout(() => {
           setShowStatic(false);
           setCurrentVideoIndex((prev) => prev + 1);
-        }, 300); // Quick flash between videos
+        }, 1000); // Quick flash between videos
       }
     };
 
@@ -517,15 +541,15 @@ export default function HeroSectionV3({
           >
             {/* Floating particles */}
             <div className="particles">
-              {Array.from({ length: 20 }).map((_, i) => (
+              {PARTICLES.map((particle) => (
                 <div
-                  key={i}
+                  key={particle.id}
                   className="particle"
                   style={{
-                    left: `${Math.random() * 100}%`,
-                    top: `${Math.random() * 100}%`,
-                    animationDelay: `${Math.random() * 3}s`,
-                    animationDuration: `${2 + Math.random() * 2}s`,
+                    left: `${particle.left}%`,
+                    top: `${particle.top}%`,
+                    animationDelay: `${particle.delay}s`,
+                    animationDuration: `${particle.duration}s`,
                   }}
                 />
               ))}
