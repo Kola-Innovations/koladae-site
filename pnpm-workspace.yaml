@@ -1,0 +1,8 @@
+packages:
+  - apps/*
+  - packages/*
+catalog:
+  "@orpc/server": ^1.10.0
+  "@orpc/client": ^1.10.0
+  "@orpc/openapi": ^1.10.0
+  "@orpc/zod": ^1.10.0
