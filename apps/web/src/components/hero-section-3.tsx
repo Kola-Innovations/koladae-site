@@ -32,6 +32,23 @@ const PARTICLES = [
   { id: "p20", left: 19, top: 47, delay: 1.0, duration: 2.5 },
 ];
 
+// Vinyl records floating on static screen
+const VINYLS = [
+  { id: "v1", left: 15, top: 20, size: 60, duration: 8, delay: 0 },
+  { id: "v2", left: 75, top: 70, size: 45, duration: 6, delay: 0.5 },
+  { id: "v3", left: 85, top: 15, size: 35, duration: 10, delay: 1 },
+  { id: "v4", left: 25, top: 75, size: 50, duration: 7, delay: 0.3 },
+];
+
+// Butterflies floating around
+const BUTTERFLIES = [
+  { id: "b1", left: 20, top: 40, delay: 0, duration: 4 },
+  // { id: "b2", left: 70, top: 30, delay: 1.5, duration: 5 },
+  // { id: "b3", left: 50, top: 60, delay: 0.8, duration: 4.5 },
+  // { id: "b4", left: 80, top: 55, delay: 2, duration: 3.5 },
+  // { id: "b5", left: 35, top: 25, delay: 1, duration: 5.5 },
+];
+
 interface HeroSectionV3Props {
   artistName?: string;
   rotatingWords?: string[];
@@ -83,7 +100,7 @@ export default function HeroSectionV3({
         setTimeout(() => {
           setShowStatic(false);
           setCurrentVideoIndex((prev) => prev + 1);
-        }, 1000); // Quick flash between videos
+        }, 2000); // Quick flash between videos
       }
     };
 
@@ -197,6 +214,166 @@ export default function HeroSectionV3({
           80% { transform: translate(4%, 4%); }
           90% { transform: translate(-4%, 3%); }
           100% { transform: translate(0, 0); }
+        }
+
+        /* Spinning vinyl record */
+        .vinyl {
+          position: absolute;
+          border-radius: 50%;
+          background: radial-gradient(
+            circle at center,
+            #1a1a1a 0%,
+            #1a1a1a 15%,
+            #333 16%,
+            #111 17%,
+            #222 30%,
+            #111 31%,
+            #333 45%,
+            #111 46%,
+            #222 60%,
+            #111 61%,
+            #333 75%,
+            #111 76%,
+            #1a1a1a 90%,
+            #333 100%
+          );
+          box-shadow:
+            0 0 0 3px #111,
+            0 0 0 6px #333,
+            0 0 20px rgba(0,0,0,0.5);
+          animation: spinVinyl linear infinite, floatVinyl ease-in-out infinite;
+          opacity: 0.7;
+        }
+
+        .vinyl::before {
+          content: '';
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 30%;
+          height: 30%;
+          border-radius: 50%;
+          background: radial-gradient(
+            circle,
+            #ff6b35 0%,
+            #f7931e 50%,
+            #1a1a1a 51%,
+            #1a1a1a 100%
+          );
+        }
+
+        .vinyl::after {
+          content: '';
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 8%;
+          height: 8%;
+          border-radius: 50%;
+          background: #111;
+        }
+
+        @keyframes spinVinyl {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+
+        @keyframes floatVinyl {
+          0%, 100% {
+            transform: rotate(0deg) translateY(0px);
+          }
+          50% {
+            transform: rotate(180deg) translateY(-15px);
+          }
+        }
+
+        /* Butterfly */
+        .butterfly {
+          position: absolute;
+          width: 30px;
+          height: 20px;
+          animation: butterflyFloat ease-in-out infinite;
+        }
+
+        .butterfly-wing {
+          position: absolute;
+          width: 12px;
+          height: 18px;
+          background: linear-gradient(135deg,
+            rgba(255, 200, 150, 0.6) 0%,
+            rgba(255, 150, 100, 0.4) 50%,
+            rgba(200, 100, 50, 0.3) 100%
+          );
+          border-radius: 50% 50% 50% 50% / 70% 70% 30% 30%;
+          animation: flapWing ease-in-out infinite;
+        }
+
+        .butterfly-wing.left {
+          left: 0;
+          transform-origin: right center;
+        }
+
+        .butterfly-wing.right {
+          right: 0;
+          transform-origin: left center;
+          animation-delay: 0.05s;
+        }
+
+        .butterfly-body {
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+          width: 3px;
+          height: 14px;
+          background: rgba(100, 70, 50, 0.7);
+          border-radius: 50%;
+        }
+
+        @keyframes flapWing {
+          0%, 100% { transform: rotateY(0deg) scaleX(1); }
+          50% { transform: rotateY(70deg) scaleX(0.5); }
+        }
+
+        @keyframes butterflyFloat {
+          0%, 100% {
+            transform: translate(0, 0) rotate(-5deg);
+          }
+          25% {
+            transform: translate(20px, -30px) rotate(5deg);
+          }
+          50% {
+            transform: translate(40px, -10px) rotate(-3deg);
+          }
+          75% {
+            transform: translate(20px, 20px) rotate(8deg);
+          }
+        }
+
+        /* Pre-save arrows (inline next to button) */
+        .presave-arrow-inline {
+          display: flex;
+          align-items: center;
+        }
+
+        @keyframes arrowPulseRight {
+          0%, 100% {
+            transform: translateX(0);
+          }
+          50% {
+            transform: translateX(8px);
+          }
+        }
+
+        @keyframes arrowPulseLeft {
+          0%, 100% {
+            transform: translateX(0);
+          }
+          50% {
+            transform: translateX(-8px);
+          }
         }
 
         /* Floating particles */
@@ -554,6 +731,49 @@ export default function HeroSectionV3({
                 />
               ))}
             </div>
+
+            {/* Vinyl Records */}
+            {VINYLS.map((vinyl) => (
+              <div
+                key={vinyl.id}
+                className="vinyl"
+                style={{
+                  left: `${vinyl.left}%`,
+                  top: `${vinyl.top}%`,
+                  width: `${vinyl.size}px`,
+                  height: `${vinyl.size}px`,
+                  animationDelay: `${vinyl.delay}s`,
+                  animationDuration: `${vinyl.duration}s, ${
+                    vinyl.duration * 1.5
+                  }s`,
+                }}
+              />
+            ))}
+
+            {/* Butterflies */}
+            {BUTTERFLIES.map((butterfly) => (
+              <div
+                key={butterfly.id}
+                className="butterfly"
+                style={{
+                  left: `${butterfly.left}%`,
+                  top: `${butterfly.top}%`,
+                  animationDelay: `${butterfly.delay}s`,
+                  animationDuration: `${butterfly.duration}s`,
+                }}
+              >
+                <div
+                  className="butterfly-wing left"
+                  style={{ animationDuration: "0.3s" }}
+                />
+                <div
+                  className="butterfly-wing right"
+                  style={{ animationDuration: "0.3s" }}
+                />
+                <div className="butterfly-body" />
+              </div>
+            ))}
+
           </motion.div>
         )}
       </AnimatePresence>
@@ -572,6 +792,7 @@ export default function HeroSectionV3({
 
       {/* Film Grain */}
       <div className="film-grain" />
+
 
       {/* Content Container */}
       <div
@@ -629,104 +850,160 @@ export default function HeroSectionV3({
             className="relative flex w-screen items-center justify-center"
             style={{ height: "140px" }}
           >
-          {/* Left Bar Half */}
-          <motion.div
-            className={`grainy-bar absolute left-0 h-full ${
-              animatedGrain ? "animated" : ""
-            }`}
-            style={{ width: "50%" }}
-            initial={{ x: "-100%" }}
-            animate={loaded ? { x: 0 } : { x: "-100%" }}
-            transition={{
-              duration: 1,
-              ease: [0.25, 0.46, 0.45, 0.94],
-              delay: 0.3,
-            }}
-          >
-            {/* COMING label */}
-            <motion.span
-              className="absolute left-8 top-1/2 -translate-y-1/2 font-bold uppercase tracking-widest"
-              style={{
-                fontSize: "clamp(1.2rem, 3vw, 2rem)",
-                color: "rgba(255, 250, 245, 0.9)",
-                letterSpacing: "0.2em",
+            {/* Left Bar Half */}
+            <motion.div
+              className={`grainy-bar absolute left-0 h-full ${
+                animatedGrain ? "animated" : ""
+              }`}
+              style={{ width: "50%" }}
+              initial={{ x: "-100%" }}
+              animate={loaded ? { x: 0 } : { x: "-100%" }}
+              transition={{
+                duration: 1,
+                ease: [0.25, 0.46, 0.45, 0.94],
+                delay: 0.3,
               }}
-              initial={{ opacity: 0 }}
-              animate={barsReady ? { opacity: 1 } : { opacity: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
             >
-              {isReleased ? "OUT" : "COMING"}
-            </motion.span>
-          </motion.div>
-
-          {/* Right Bar Half */}
-          <motion.div
-            className={`grainy-bar absolute right-0 h-full ${
-              animatedGrain ? "animated" : ""
-            }`}
-            style={{ width: "50%" }}
-            initial={{ x: "100%" }}
-            animate={loaded ? { x: 0 } : { x: "100%" }}
-            transition={{
-              duration: 1,
-              ease: [0.25, 0.46, 0.45, 0.94],
-              delay: 0.3,
-            }}
-          >
-            {/* SOON label */}
-            <motion.span
-              className="absolute right-8 top-1/2 -translate-y-1/2 font-bold uppercase tracking-widest"
-              style={{
-                fontSize: "clamp(1.2rem, 3vw, 2rem)",
-                color: "rgba(255, 250, 245, 0.9)",
-                letterSpacing: "0.2em",
-              }}
-              initial={{ opacity: 0 }}
-              animate={barsReady ? { opacity: 1 } : { opacity: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-            >
-              {isReleased ? "NOW" : "SOON"}
-            </motion.span>
-          </motion.div>
-
-          {/* Rotating Text - Centered */}
-          <div
-            className="absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2"
-            style={{ minWidth: "300px", textAlign: "center" }}
-          >
-            <AnimatePresence mode="wait">
+              {/* COMING label */}
               <motion.span
-                key={currentWordIndex}
-                className={enableGlitch && isGlitching ? "glitching" : ""}
+                className="absolute left-8 top-1/2 -translate-y-1/2 font-bold uppercase tracking-widest"
                 style={{
-                  fontSize: "clamp(2rem, 5vw, 4rem)",
-                  fontWeight: 800,
-                  letterSpacing: "0.05em",
-                  color: "white",
-                  textTransform: "uppercase",
-                  display: "inline-block",
+                  fontSize: "clamp(1.2rem, 3vw, 2rem)",
+                  color: "rgba(255, 250, 245, 0.9)",
+                  letterSpacing: "0.2em",
                 }}
                 initial={{ opacity: 0 }}
                 animate={barsReady ? { opacity: 1 } : { opacity: 0 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.1, ease: "easeOut" }}
+                transition={{ duration: 0.5, delay: 0.2 }}
               >
-                {rotatingWords[currentWordIndex]}
+                {isReleased ? "OUT" : "COMING"}
               </motion.span>
-            </AnimatePresence>
-          </div>
+            </motion.div>
+
+            {/* Right Bar Half */}
+            <motion.div
+              className={`grainy-bar absolute right-0 h-full ${
+                animatedGrain ? "animated" : ""
+              }`}
+              style={{ width: "50%" }}
+              initial={{ x: "100%" }}
+              animate={loaded ? { x: 0 } : { x: "100%" }}
+              transition={{
+                duration: 1,
+                ease: [0.25, 0.46, 0.45, 0.94],
+                delay: 0.3,
+              }}
+            >
+              {/* SOON label */}
+              <motion.span
+                className="absolute right-8 top-1/2 -translate-y-1/2 font-bold uppercase tracking-widest"
+                style={{
+                  fontSize: "clamp(1.2rem, 3vw, 2rem)",
+                  color: "rgba(255, 250, 245, 0.9)",
+                  letterSpacing: "0.2em",
+                }}
+                initial={{ opacity: 0 }}
+                animate={barsReady ? { opacity: 1 } : { opacity: 0 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+              >
+                {isReleased ? "NOW" : "SOON"}
+              </motion.span>
+            </motion.div>
+
+            {/* Rotating Text - Centered */}
+            <div
+              className="absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2"
+              style={{ minWidth: "300px", textAlign: "center" }}
+            >
+              <AnimatePresence mode="wait">
+                <motion.span
+                  key={currentWordIndex}
+                  className={enableGlitch && isGlitching ? "glitching" : ""}
+                  style={{
+                    fontSize: "clamp(2rem, 5vw, 4rem)",
+                    fontWeight: 800,
+                    letterSpacing: "0.05em",
+                    color: "white",
+                    textTransform: "uppercase",
+                    display: "inline-block",
+                  }}
+                  initial={{ opacity: 0 }}
+                  animate={barsReady ? { opacity: 1 } : { opacity: 0 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.1, ease: "easeOut" }}
+                >
+                  {rotatingWords[currentWordIndex]}
+                </motion.span>
+              </AnimatePresence>
+            </div>
           </div>
 
-          {/* Pre-save Button - Right under the bar */}
-          <motion.a
-            href={presaveUrl}
-            className="cta-btn"
-            initial={{ opacity: 0, y: 10 }}
-            animate={barsReady ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-          >
-            {isReleased ? "Listen Now" : "Pre-Save"}
-          </motion.a>
+          {/* Pre-save Button with Arrows - Right under the bar */}
+          <div className="flex items-center gap-4">
+            {/* Left Arrow */}
+            <AnimatePresence>
+              {showStatic && (
+                <motion.div
+                  className="presave-arrow-inline"
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -20 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <svg
+                    width="32"
+                    height="32"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="rgba(255, 255, 255, 0.8)"
+                    strokeWidth="1"
+                    aria-hidden="true"
+                    style={{ animation: "arrowPulseLeft 1s ease-in-out infinite" }}
+                  >
+                    <title>Pre-save arrow</title>
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                  </svg>
+                </motion.div>
+              )}
+            </AnimatePresence>
+
+            <motion.a
+              href={presaveUrl}
+              className="cta-btn"
+              initial={{ opacity: 0, y: 10 }}
+              animate={barsReady ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+            >
+              {isReleased ? "Listen Now" : "Pre-Save"}
+            </motion.a>
+
+            {/* Right Arrow */}
+            <AnimatePresence>
+              {showStatic && (
+                <motion.div
+                  className="presave-arrow-inline"
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: 20 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <svg
+                    width="32"
+                    height="32"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="rgba(255, 255, 255, 0.8)"
+                    strokeWidth="1"
+                    aria-hidden="true"
+                    style={{ animation: "arrowPulseRight 1s ease-in-out infinite" }}
+                  >
+                    <title>Pre-save arrow</title>
+                    <path d="M19 12H5M12 19l-7-7 7-7" />
+                  </svg>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
         </div>
 
         {/* Bottom Section */}
