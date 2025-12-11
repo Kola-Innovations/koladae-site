@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "motion/react";
 import video1 from "@/videos/ye-ye-ye.mp4";
 import video2 from "@/videos/yea-lean-with-it.mp4";
 import video3 from "@/videos/intro-dimsum.mp4";
-import { Link } from "@tanstack/react-router";
+// import { Link } from "@tanstack/react-router";
 import MainNav from "./nav";
 
 const VIDEO_SOURCES = [video1, video2, video3];

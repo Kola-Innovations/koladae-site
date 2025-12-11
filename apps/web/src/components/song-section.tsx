@@ -10,6 +10,8 @@ interface SongSectionProps {
   title?: string;
   description?: string | string[];
   images?: [string, string, string];
+  videoUrl?: string;
+  videoOpacity?: number;
   listenUrl?: string;
   buttonText?: string;
   reversed?: boolean;
@@ -25,6 +27,8 @@ export default function SongSection({
   title = "Keep On Rolling",
   description = defaultDescription,
   images = DEFAULT_IMAGES as [string, string, string],
+  videoUrl,
+  videoOpacity = 0.2,
   listenUrl = "#",
   buttonText = "Listen Now",
   reversed = false,
@@ -34,6 +38,102 @@ export default function SongSection({
     ? description
     : [description];
 
+  // If video is provided, use sticky split-screen layout
+  if (videoUrl) {
+    return (
+      <section className="relative min-h-screen w-full">
+        <div className={`flex min-h-screen ${reversed ? "flex-row-reverse" : ""}`}>
+          {/* Sticky Video Panel */}
+          <div className="sticky top-0 hidden h-screen w-[55%] lg:block">
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="h-full w-full object-cover"
+              style={{ opacity: videoOpacity }}
+            >
+              <source src={videoUrl} type="video/mp4" />
+            </video>
+            {/* Dark overlay for better contrast */}
+            <div
+              className="absolute inset-0"
+              style={{
+                background: `linear-gradient(${reversed ? "to left" : "to right"}, transparent 0%, ${darkBgColor} 100%)`,
+              }}
+            />
+          </div>
+
+          {/* Scrolling Content Panel */}
+          <motion.div
+            className="flex min-h-screen w-full flex-col justify-center px-8 py-20 lg:w-[45%] lg:px-16"
+            style={{ backgroundColor: darkBgColor }}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <motion.h2
+              className="mb-6 font-bold text-white"
+              style={{
+                fontSize: "clamp(2.5rem, 6vw, 4rem)",
+                lineHeight: 1.1,
+              }}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              {title}
+            </motion.h2>
+            <div className="mb-10 space-y-5">
+              {descriptionArray.map((paragraph, idx) => (
+                <motion.p
+                  key={paragraph.slice(0, 30)}
+                  className="text-gray-300"
+                  style={{
+                    fontSize: "clamp(1rem, 1.5vw, 1.125rem)",
+                    lineHeight: 1.8,
+                  }}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.3 + idx * 0.1 }}
+                >
+                  {paragraph}
+                </motion.p>
+              ))}
+            </div>
+            <motion.a
+              href={listenUrl}
+              className="inline-flex w-fit items-center gap-3 border border-white px-8 py-4 text-sm font-medium text-white transition-all duration-300 hover:text-black hover:bg-white"
+              style={{ letterSpacing: "0.1em" }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.5 }}
+            >
+              {buttonText}
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                aria-hidden="true"
+              >
+                <title>Arrow</title>
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </motion.a>
+          </motion.div>
+        </div>
+      </section>
+    );
+  }
+
+  // Fallback: Original image grid layout
   const darkPanel = (
     <motion.div
       className="flex flex-1 flex-col justify-center px-8 py-16 md:px-12 lg:px-16"
