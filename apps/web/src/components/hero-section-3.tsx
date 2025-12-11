@@ -3,6 +3,8 @@ import { motion, AnimatePresence } from "motion/react";
 import video1 from "@/videos/ye-ye-ye.mp4";
 import video2 from "@/videos/yea-lean-with-it.mp4";
 import video3 from "@/videos/intro-dimsum.mp4";
+import { Link } from "@tanstack/react-router";
+import MainNav from "./nav";
 
 const VIDEO_SOURCES = [video1, video2, video3];
 const VIDEO_DURATION = 4000; // 8 seconds per video
@@ -1001,7 +1003,7 @@ export default function HeroSectionV3({
         </div>
 
         {/* Navigation */}
-        <nav
+        {/* <nav
           className="absolute top-12 flex w-full justify-center gap-12"
           style={{
             animation: loaded ? "fadeIn 1s ease forwards" : "none",
@@ -1010,16 +1012,17 @@ export default function HeroSectionV3({
             animationFillMode: "forwards",
           }}
         >
-          <a href="#" className="nav-link">
+          <Link to="/" className="nav-link">
             About
-          </a>
-          <a href="#" className="nav-link">
+          </Link>
+          <Link to="/" className="nav-link">
             Shop
-          </a>
-          <a href="#" className="nav-link">
+          </Link>
+          <Link to="/" className="nav-link">
             Press Kit
-          </a>
-        </nav>
+          </Link>
+        </nav> */}
+        <MainNav />
 
         {/* Center Section - The Bar + Pre-save */}
         <div className="flex flex-col items-center gap-6">
