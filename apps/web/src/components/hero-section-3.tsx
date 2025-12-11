@@ -33,20 +33,28 @@ export default function HeroSectionV3({
   }, []);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      if (enableGlitch) {
-        setIsGlitching(true);
-        setTimeout(() => setIsGlitching(false), 150);
-      }
-      setTimeout(
-        () => {
-          setCurrentWordIndex((prev) => (prev + 1) % rotatingWords.length);
-        },
-        enableGlitch ? 75 : 0
-      );
-    }, 2500);
-    return () => clearInterval(interval);
-  }, [rotatingWords.length, enableGlitch]);
+    let timeoutId: ReturnType<typeof setTimeout>;
+
+    const scheduleNextWord = () => {
+      const isLastWord = currentWordIndex === rotatingWords.length - 1;
+      // Fast switch (400ms) between words, 2 second pause on last word
+      const delay = isLastWord ? 2000 : 300;
+
+      timeoutId = setTimeout(() => {
+        if (enableGlitch) {
+          setIsGlitching(true);
+          setTimeout(() => setIsGlitching(false), 100);
+        }
+        setCurrentWordIndex((prev) => (prev + 1) % rotatingWords.length);
+      }, delay);
+    };
+
+    if (barsReady) {
+      scheduleNextWord();
+    }
+
+    return () => clearTimeout(timeoutId);
+  }, [currentWordIndex, rotatingWords.length, enableGlitch, barsReady]);
 
   const handleEmailSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -507,14 +515,10 @@ export default function HeroSectionV3({
                   textTransform: "uppercase",
                   display: "inline-block",
                 }}
-                initial={{ opacity: 0, y: 20, scale: 0.95 }}
-                animate={
-                  barsReady
-                    ? { opacity: 1, y: 0, scale: 1 }
-                    : { opacity: 0, y: 20, scale: 0.95 }
-                }
-                exit={{ opacity: 0, y: -20, scale: 0.95 }}
-                transition={{ duration: 0.3, ease: "easeOut" }}
+                initial={{ opacity: 0 }}
+                animate={barsReady ? { opacity: 1 } : { opacity: 0 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.1, ease: "easeOut" }}
               >
                 {rotatingWords[currentWordIndex]}
               </motion.span>
