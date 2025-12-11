@@ -132,3 +132,20 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+/* Reusable container with max-width */
+.container-main {
+  width: 100%;
+  max-width: 1500px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+@media (max-width: 768px) {
+  .container-main {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}

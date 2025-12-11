@@ -374,7 +374,7 @@ export default function PressKitHero({
         <MainNav />
 
         {/* Main Content - Split Layout */}
-        <div className="flex flex-1 flex-col items-center justify-center gap-12 md:flex-row md:items-center md:justify-between">
+        <div className="container-main flex flex-1 flex-col items-center justify-center gap-12 md:flex-row md:items-center md:justify-between">
           {/* Left Side - Text */}
           <motion.div
             className="flex flex-col items-center text-center md:items-start md:text-left"
