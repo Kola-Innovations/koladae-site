@@ -623,11 +623,12 @@ export default function HeroSectionV3({
           </a>
         </nav>
 
-        {/* Center Section - The Bar */}
-        <div
-          className="relative flex w-screen items-center justify-center"
-          style={{ height: "140px" }}
-        >
+        {/* Center Section - The Bar + Pre-save */}
+        <div className="flex flex-col items-center gap-6">
+          <div
+            className="relative flex w-screen items-center justify-center"
+            style={{ height: "140px" }}
+          >
           {/* Left Bar Half */}
           <motion.div
             className={`grainy-bar absolute left-0 h-full ${
@@ -714,6 +715,18 @@ export default function HeroSectionV3({
               </motion.span>
             </AnimatePresence>
           </div>
+          </div>
+
+          {/* Pre-save Button - Right under the bar */}
+          <motion.a
+            href={presaveUrl}
+            className="cta-btn"
+            initial={{ opacity: 0, y: 10 }}
+            animate={barsReady ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+          >
+            {isReleased ? "Listen Now" : "Pre-Save"}
+          </motion.a>
         </div>
 
         {/* Bottom Section */}
@@ -726,11 +739,6 @@ export default function HeroSectionV3({
             animationFillMode: "forwards",
           }}
         >
-          {/* Pre-save / Listen Now Button */}
-          <a href={presaveUrl} className="cta-btn">
-            {isReleased ? "Listen Now" : "Pre-Save"}
-          </a>
-
           {/* Email Signup */}
           <form onSubmit={handleEmailSubmit} className="flex gap-0">
             <input
