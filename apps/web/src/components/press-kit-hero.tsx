@@ -355,11 +355,11 @@ export default function PressKitHero({
           className="h-full w-full object-cover"
           style={{ opacity: imageOpacity }}
         />
-        {/* Gradient overlay - fades to black on left edge */}
+        {/* Gradient overlay - smooth fade to black on left */}
         <div
           className="absolute inset-0"
           style={{
-            background: "linear-gradient(to right, black 0%, transparent 100%)",
+            background: "linear-gradient(to left, transparent 0%, black 100%)",
           }}
         />
       </motion.div>
