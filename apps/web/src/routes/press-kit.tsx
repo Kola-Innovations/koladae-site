@@ -20,7 +20,7 @@ function RouteComponent() {
       />
       <AboutSection bgColor="cream" />
       <SongSection videoUrl={video3} reversed />
-      <SongSectionStacked />
+      <SongSectionStacked headerVideo={video3} />
       <SongSectionHero />
       <SongSectionAlbum />
     </div>

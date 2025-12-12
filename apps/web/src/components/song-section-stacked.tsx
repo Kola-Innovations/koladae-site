@@ -27,6 +27,7 @@ interface SongSectionStackedProps {
   description?: string | string[];
   coverImage?: string;
   headerImage?: string;
+  headerVideo?: string;
   releaseDate?: string;
   streamingLinks?: StreamingLink[];
   bgColor?: string;
@@ -88,9 +89,10 @@ export default function SongSectionStacked({
   description = defaultDescription,
   coverImage = DEFAULT_COVER,
   headerImage = DEFAULT_HEADER,
+  headerVideo,
   releaseDate = "2024",
   streamingLinks = defaultStreamingLinks,
-  bgColor = "#f5f5f5",
+  bgColor = "#f5f0e8",
 }: SongSectionStackedProps) {
   const descriptionArray = Array.isArray(description)
     ? description
@@ -107,7 +109,7 @@ export default function SongSectionStacked({
       {/* Film Grain Overlay - covers entire section */}
       <div className="film-grain-stacked" />
 
-      {/* Header Image - Full Width with horizontal blend */}
+      {/* Header Media - Full Width with horizontal blend */}
       <motion.div
         className="relative h-[50vh] w-full overflow-hidden md:h-[60vh]"
         initial={{ opacity: 0 }}
@@ -115,12 +117,25 @@ export default function SongSectionStacked({
         viewport={{ once: false, amount: 0.3 }}
         transition={{ duration: 0.8 }}
       >
-        <img
-          src={headerImage}
-          alt={title}
-          className="h-full w-full object-cover"
-          style={{ opacity: 0.7 }}
-        />
+        {headerVideo ? (
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="h-full w-full object-cover"
+            style={{ opacity: 0.7 }}
+          >
+            <source src={headerVideo} type="video/mp4" />
+          </video>
+        ) : (
+          <img
+            src={headerImage}
+            alt={title}
+            className="h-full w-full object-cover"
+            style={{ opacity: 0.7 }}
+          />
+        )}
         {/* Gradient overlay - smooth vertical fade to background color */}
         <div
           className="absolute inset-0"
