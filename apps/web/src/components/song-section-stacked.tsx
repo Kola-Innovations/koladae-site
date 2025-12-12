@@ -1,5 +1,20 @@
 import { motion } from "motion/react";
 
+// Film grain CSS for grainy effect
+const grainStyles = `
+  .film-grain-stacked {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.08;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  }
+`;
+
 interface StreamingLink {
   name: string;
   url: string;
@@ -83,10 +98,16 @@ export default function SongSectionStacked({
 
   return (
     <section
-      className="min-h-screen w-full"
+      className="relative min-h-screen w-full"
       style={{ backgroundColor: bgColor }}
     >
-      {/* Header Image - Full Width */}
+      {/* Grain Styles */}
+      <style>{grainStyles}</style>
+
+      {/* Film Grain Overlay - covers entire section */}
+      <div className="film-grain-stacked" />
+
+      {/* Header Image - Full Width with horizontal blend */}
       <motion.div
         className="relative h-[50vh] w-full overflow-hidden md:h-[60vh]"
         initial={{ opacity: 0 }}
@@ -98,12 +119,19 @@ export default function SongSectionStacked({
           src={headerImage}
           alt={title}
           className="h-full w-full object-cover"
+          style={{ opacity: 0.7 }}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/50" />
+        {/* Gradient overlay - smooth vertical fade to background color */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background: `linear-gradient(to bottom, transparent 0%, transparent 40%, ${bgColor} 100%)`,
+          }}
+        />
       </motion.div>
 
       {/* Content Section */}
-      <div className="container-main relative -mt-24 pb-20 md:-mt-32">
+      <div className="container-main relative z-10 -mt-24 pb-20 md:-mt-32">
         <div className="flex flex-col gap-8 md:flex-row md:gap-12">
           {/* Album Cover - Overlapping */}
           <motion.div
