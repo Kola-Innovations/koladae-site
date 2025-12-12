@@ -3,6 +3,9 @@ import PressKitHero from "@/components/press-kit-hero";
 import SongSection from "@/components/song-section";
 import { createFileRoute } from "@tanstack/react-router";
 import video3 from "@/videos/intro-dimsum.mp4";
+import SongSectionStacked from "@/components/song-section-stacked";
+import SongSectionHero from "@/components/song-section-hero";
+import SongSectionAlbum from "@/components/song-section-album";
 
 export const Route = createFileRoute("/press-kit")({
   component: RouteComponent,
@@ -17,6 +20,9 @@ function RouteComponent() {
       />
       <AboutSection />
       <SongSection videoUrl={video3} reversed />
+      <SongSectionStacked />
+      <SongSectionHero />
+      <SongSectionAlbum />
     </div>
   );
 }

@@ -1,4 +1,5 @@
-import { motion } from "motion/react";
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "motion/react";
 
 const DEFAULT_IMAGE_URL =
   "https://images.unsplash.com/photo-1657042855066-7f09c6c2c350?q=80&w=1335&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
@@ -89,8 +90,21 @@ export default function AboutSection({
     ? description
     : [description];
 
+  // Parallax effect for image
+  const sectionRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+
+  // Image moves slower than scroll (parallax effect)
+  const imageY = useTransform(scrollYProgress, [0, 1], ["-15%", "15%"]);
+
   return (
-    <section className="flex min-h-screen items-center bg-white py-20 md:py-32">
+    <section
+      ref={sectionRef}
+      className="flex min-h-screen items-center bg-white py-20 md:py-32"
+    >
       <div className="container-main">
         <div className="flex flex-col gap-12 lg:flex-row lg:gap-16">
           {/* Left Side - Text Content */}
@@ -111,9 +125,9 @@ export default function AboutSection({
               {title}
             </h2>
             <div className="space-y-6">
-              {descriptionArray.map((paragraph, index) => (
+              {descriptionArray.map((paragraph) => (
                 <p
-                  key={index}
+                  key={paragraph.slice(0, 30)}
                   className="text-gray-600"
                   style={{
                     fontSize: "clamp(0.875rem, 1.5vw, 1rem)",
@@ -134,7 +148,7 @@ export default function AboutSection({
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            {/* Image */}
+            {/* Image with Parallax */}
             <div
               className="relative mb-6 w-full overflow-hidden"
               style={{
@@ -142,10 +156,15 @@ export default function AboutSection({
                 aspectRatio: "4/5",
               }}
             >
-              <img
+              <motion.img
                 src={imageUrl}
                 alt="About"
-                className="h-full w-full object-cover"
+                className="h-[120%] w-full object-cover"
+                style={{
+                  y: imageY,
+                  position: "absolute",
+                  top: "-10%",
+                }}
               />
             </div>
 

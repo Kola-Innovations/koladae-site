@@ -70,7 +70,7 @@ export default function SongSection({
             style={{ backgroundColor: darkBgColor }}
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
+            viewport={{ once: false, amount: 0.3 }}
             transition={{ duration: 0.6 }}
           >
             <motion.h2
@@ -81,7 +81,7 @@ export default function SongSection({
               }}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: false, amount: 0.3 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
               {title}
@@ -97,7 +97,7 @@ export default function SongSection({
                   }}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
+                  viewport={{ once: false, amount: 0.3 }}
                   transition={{ duration: 0.5, delay: 0.3 + idx * 0.1 }}
                 >
                   {paragraph}
@@ -110,7 +110,7 @@ export default function SongSection({
               style={{ letterSpacing: "0.1em" }}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: false, amount: 0.3 }}
               transition={{ duration: 0.5, delay: 0.5 }}
             >
               {buttonText}
@@ -140,7 +140,7 @@ export default function SongSection({
       style={{ backgroundColor: darkBgColor }}
       initial={{ opacity: 0, x: reversed ? 30 : -30 }}
       whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ once: true }}
+      viewport={{ once: false, amount: 0.3 }}
       transition={{ duration: 0.6 }}
     >
       <h2
@@ -191,7 +191,7 @@ export default function SongSection({
       className="flex-[1.5] bg-white p-6 md:p-8"
       initial={{ opacity: 0, x: reversed ? -30 : 30 }}
       whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ once: true }}
+      viewport={{ once: false, amount: 0.3 }}
       transition={{ duration: 0.6, delay: 0.2 }}
     >
       <div
@@ -207,7 +207,7 @@ export default function SongSection({
           className="relative overflow-hidden"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false, amount: 0.3 }}
           transition={{ duration: 0.5, delay: 0.3 }}
         >
           <img
@@ -222,7 +222,7 @@ export default function SongSection({
           className="relative row-span-2 overflow-hidden"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false, amount: 0.3 }}
           transition={{ duration: 0.5, delay: 0.5 }}
         >
           <img
@@ -237,7 +237,7 @@ export default function SongSection({
           className="relative overflow-hidden"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false, amount: 0.3 }}
           transition={{ duration: 0.5, delay: 0.4 }}
         >
           <img
