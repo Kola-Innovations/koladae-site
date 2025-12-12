@@ -277,7 +277,7 @@ export default function PressKitHero({
 
         /* Press Kit specific styles */
         .press-kit-title {
-          font-size: clamp(4rem, 12vw, 10rem);
+          font-size: clamp(2.5rem, 12vw, 10rem);
           font-weight: 900;
           letter-spacing: 0.05em;
           line-height: 0.9;
@@ -376,10 +376,10 @@ export default function PressKitHero({
         <MainNav />
 
         {/* Main Content */}
-        <div className="container-main flex flex-1 items-center">
+        <div className="container-main flex flex-1 items-center justify-center lg:justify-start">
           {/* Text Content */}
           <motion.div
-            className="flex flex-col items-center text-center md:items-start md:text-left"
+            className="flex flex-col items-center text-center lg:items-start lg:text-left"
             initial={{ opacity: 0, y: 30 }}
             animate={loaded ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             transition={{ duration: 0.8, delay: 0.3 }}
