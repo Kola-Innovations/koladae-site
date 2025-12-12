@@ -8,11 +8,13 @@ const DEFAULT_IMAGE_URL =
 interface PressKitHeroProps {
   artistName?: string;
   imageUrl?: string;
+  imageOpacity?: number;
 }
 
 export default function PressKitHero({
   artistName = "KOLADAE",
   imageUrl = DEFAULT_IMAGE_URL,
+  imageOpacity = 0.3,
 }: PressKitHeroProps) {
   const [loaded, setLoaded] = useState(false);
 
@@ -303,28 +305,6 @@ export default function PressKitHero({
           text-transform: uppercase;
         }
 
-        .press-kit-image {
-          object-fit: cover;
-          width: 100%;
-          height: 100%;
-        }
-
-        .press-kit-image-container {
-          position: relative;
-          width: 100%;
-          max-width: 450px;
-          aspect-ratio: 3/4;
-          overflow: hidden;
-          transform: rotate(2deg);
-          box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-        }
-
-        @media (max-width: 768px) {
-          .press-kit-image-container {
-            max-width: 280px;
-            transform: rotate(0deg);
-          }
-        }
       `}</style>
 
       {/* TV Static Background - Always visible */}
@@ -362,6 +342,28 @@ export default function PressKitHero({
       {/* Film Grain */}
       <div className="film-grain" />
 
+      {/* Faded Image Panel - Right Side */}
+      <motion.div
+        className="absolute top-0 right-0 z-5 hidden h-full w-1/2 lg:block"
+        initial={{ opacity: 0, x: 50 }}
+        animate={loaded ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
+        transition={{ duration: 0.8, delay: 0.3 }}
+      >
+        <img
+          src={imageUrl}
+          alt=""
+          className="h-full w-full object-cover"
+          style={{ opacity: imageOpacity }}
+        />
+        {/* Gradient overlay - fades to black on left edge */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background: "linear-gradient(to right, black 0%, transparent 100%)",
+          }}
+        />
+      </motion.div>
+
       {/* Content Container */}
       <div
         className="press-kit-container relative z-40 flex h-full flex-col px-8 py-12 md:px-16"
@@ -373,9 +375,9 @@ export default function PressKitHero({
         {/* Navigation */}
         <MainNav />
 
-        {/* Main Content - Split Layout */}
-        <div className="container-main flex flex-1 flex-col items-center justify-center gap-12 md:flex-row md:items-center md:justify-between">
-          {/* Left Side - Text */}
+        {/* Main Content */}
+        <div className="container-main flex flex-1 items-center">
+          {/* Text Content */}
           <motion.div
             className="flex flex-col items-center text-center md:items-start md:text-left"
             initial={{ opacity: 0, y: 30 }}
@@ -388,20 +390,6 @@ export default function PressKitHero({
               <span className="press-kit-subtitle-text">Press Kit</span>
               <div className="press-kit-subtitle-line" />
             </div>
-          </motion.div>
-
-          {/* Right Side - Image */}
-          <motion.div
-            className="press-kit-image-container"
-            initial={{ opacity: 0, x: 50 }}
-            animate={loaded ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
-          >
-            <img
-              src={imageUrl}
-              alt={`${artistName} press photo`}
-              className="press-kit-image"
-            />
           </motion.div>
         </div>
       </div>
