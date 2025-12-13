@@ -90,7 +90,7 @@ export default function AccoladesSplit({
   reversed = false,
 }: AccoladesSplitProps) {
   return (
-    <section className="relative min-h-screen w-full">
+    <section className="relative min-h-screen w-full overflow-hidden">
       <style>{grainStyles}</style>
 
       <div

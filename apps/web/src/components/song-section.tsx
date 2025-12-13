@@ -41,7 +41,7 @@ export default function SongSection({
   // If video is provided, use sticky split-screen layout
   if (videoUrl) {
     return (
-      <section className="relative min-h-screen w-full">
+      <section className="relative min-h-screen w-full overflow-hidden">
         <div className={`flex min-h-screen ${reversed ? "flex-row-reverse" : ""}`}>
           {/* Sticky Video Panel */}
           <div className="sticky top-0 hidden h-screen w-[55%] lg:block">
@@ -251,7 +251,7 @@ export default function SongSection({
   );
 
   return (
-    <section className="min-h-screen w-full">
+    <section className="min-h-screen w-full overflow-hidden">
       <div className="flex min-h-screen flex-col lg:flex-row">
         {reversed ? (
           <>

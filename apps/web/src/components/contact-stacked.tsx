@@ -66,7 +66,7 @@ export default function ContactStacked({
 
   return (
     <section
-      className="relative min-h-screen w-full"
+      className="relative min-h-screen w-full overflow-hidden"
       style={{ backgroundColor: bgColor }}
     >
       <style>{grainStyles}</style>

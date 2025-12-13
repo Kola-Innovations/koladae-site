@@ -38,7 +38,6 @@ function RouteComponent() {
       <ContactSplit />
       <ContactDark />
       <ContactMinimal />
-
       <ContactStacked />
     </div>
   );

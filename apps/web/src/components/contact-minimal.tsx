@@ -67,7 +67,7 @@ export default function ContactMinimal({
 
   return (
     <section
-      className="relative min-h-screen w-full"
+      className="relative min-h-screen w-full overflow-hidden"
       style={{ backgroundColor: bgColor }}
     >
       <style>{grainStyles}</style>

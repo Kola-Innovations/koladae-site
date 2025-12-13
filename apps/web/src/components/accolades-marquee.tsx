@@ -100,7 +100,7 @@ export default function AccoladesMarquee({
 
   return (
     <section
-      className="relative min-h-screen w-full py-20 md:py-32"
+      className="relative min-h-screen w-full overflow-hidden py-20 md:py-32"
       style={{ backgroundColor: bgColor }}
     >
       <style>{styles}</style>

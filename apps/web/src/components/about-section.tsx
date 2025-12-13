@@ -146,7 +146,7 @@ export default function AboutSection({
   const actualBgColor = COLOR_PRESETS[bgColor]?.bg || bgColor;
 
   return (
-    <section className="relative min-h-screen w-full">
+    <section className="relative min-h-screen w-full overflow-hidden">
       <div
         className={`flex min-h-screen ${reversed ? "flex-row-reverse" : ""}`}
       >
