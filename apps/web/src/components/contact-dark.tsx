@@ -21,6 +21,7 @@ interface ContactDarkProps {
   contactInfo?: ContactInfo[];
   imageOpacity?: number;
   accentColor?: string;
+  reversed?: boolean;
 }
 
 const DEFAULT_IMAGE =
@@ -85,6 +86,7 @@ export default function ContactDark({
   contactInfo = defaultContactInfo,
   imageOpacity = 0.3,
   accentColor = "#c4956a",
+  reversed = false,
 }: ContactDarkProps) {
   const [formData, setFormData] = useState({
     name: "",
@@ -107,10 +109,12 @@ export default function ContactDark({
       <div className="vignette-dark" />
       <div className="vhs-scanlines" />
 
-      {/* Faded Image Panel - Right Side */}
+      {/* Faded Image Panel */}
       <motion.div
-        className="absolute right-0 top-0 z-[1] hidden h-full w-1/2 lg:block"
-        initial={{ opacity: 0, x: 50 }}
+        className={`absolute top-0 z-1 hidden h-full w-1/2 lg:block ${
+          reversed ? "left-0" : "right-0"
+        }`}
+        initial={{ opacity: 0, x: reversed ? -50 : 50 }}
         whileInView={{ opacity: 1, x: 0 }}
         viewport={{ once: false, amount: 0.3 }}
         transition={{ duration: 0.8, delay: 0.3 }}
@@ -121,17 +125,23 @@ export default function ContactDark({
           className="h-full w-full object-cover"
           style={{ opacity: imageOpacity }}
         />
-        {/* Gradient overlay - smooth fade to black on left */}
+        {/* Gradient overlay - smooth fade to black */}
         <div
           className="absolute inset-0"
           style={{
-            background: "linear-gradient(to left, transparent 0%, black 100%)",
+            background: reversed
+              ? "linear-gradient(to right, transparent 0%, black 100%)"
+              : "linear-gradient(to left, transparent 0%, black 100%)",
           }}
         />
       </motion.div>
 
       {/* Content Container */}
-      <div className="relative z-10 flex min-h-screen flex-col justify-center px-8 py-20 md:px-16 lg:w-1/2">
+      <div
+        className={`relative z-10 flex min-h-screen flex-col justify-center px-8 py-20 md:px-16 lg:w-1/2 ${
+          reversed ? "ml-auto" : ""
+        }`}
+      >
         <div className="container-main max-w-xl">
           {/* Title */}
           <motion.div
