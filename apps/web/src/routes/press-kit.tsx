@@ -6,6 +6,10 @@ import video3 from "@/videos/intro-dimsum.mp4";
 import SongSectionStacked from "@/components/song-section-stacked";
 import SongSectionHero from "@/components/song-section-hero";
 import SongSectionAlbum from "@/components/song-section-album";
+import AccoladesSplit from "@/components/accolades-split";
+import AccoladesStacked from "@/components/accolades-stacked";
+import AccoladesMarquee from "@/components/accolades-marquee";
+import AccoladesStats from "@/components/accolades-stats";
 
 export const Route = createFileRoute("/press-kit")({
   component: RouteComponent,
@@ -23,6 +27,10 @@ function RouteComponent() {
       <SongSectionStacked headerVideo={video3} />
       <SongSectionHero />
       <SongSectionAlbum />
+      <AccoladesSplit />
+      <AccoladesStacked />
+      <AccoladesMarquee />
+      <AccoladesStats />
     </div>
   );
 }
