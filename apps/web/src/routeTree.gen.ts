@@ -9,10 +9,16 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ShopRouteImport } from './routes/shop'
 import { Route as PressKitRouteImport } from './routes/press-kit'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ApiRpcSplatRouteImport } from './routes/api/rpc/$'
 
+const ShopRoute = ShopRouteImport.update({
+  id: '/shop',
+  path: '/shop',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PressKitRoute = PressKitRouteImport.update({
   id: '/press-kit',
   path: '/press-kit',
@@ -32,35 +38,46 @@ const ApiRpcSplatRoute = ApiRpcSplatRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/press-kit': typeof PressKitRoute
+  '/shop': typeof ShopRoute
   '/api/rpc/$': typeof ApiRpcSplatRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/press-kit': typeof PressKitRoute
+  '/shop': typeof ShopRoute
   '/api/rpc/$': typeof ApiRpcSplatRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/press-kit': typeof PressKitRoute
+  '/shop': typeof ShopRoute
   '/api/rpc/$': typeof ApiRpcSplatRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/press-kit' | '/api/rpc/$'
+  fullPaths: '/' | '/press-kit' | '/shop' | '/api/rpc/$'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/press-kit' | '/api/rpc/$'
-  id: '__root__' | '/' | '/press-kit' | '/api/rpc/$'
+  to: '/' | '/press-kit' | '/shop' | '/api/rpc/$'
+  id: '__root__' | '/' | '/press-kit' | '/shop' | '/api/rpc/$'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   PressKitRoute: typeof PressKitRoute
+  ShopRoute: typeof ShopRoute
   ApiRpcSplatRoute: typeof ApiRpcSplatRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/shop': {
+      id: '/shop'
+      path: '/shop'
+      fullPath: '/shop'
+      preLoaderRoute: typeof ShopRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/press-kit': {
       id: '/press-kit'
       path: '/press-kit'
@@ -88,6 +105,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   PressKitRoute: PressKitRoute,
+  ShopRoute: ShopRoute,
   ApiRpcSplatRoute: ApiRpcSplatRoute,
 }
 export const routeTree = rootRouteImport

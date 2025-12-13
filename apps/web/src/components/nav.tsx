@@ -50,7 +50,7 @@ function MainNav() {
         <Link to="/" className="nav-link">
           Home
         </Link>
-        <Link to="/" className="nav-link">
+        <Link to="/shop" className="nav-link">
           Shop
         </Link>
         <Link to="/press-kit" className="nav-link">
