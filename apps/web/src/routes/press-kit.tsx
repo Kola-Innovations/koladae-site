@@ -10,6 +10,10 @@ import AccoladesSplit from "@/components/accolades-split";
 import AccoladesStacked from "@/components/accolades-stacked";
 import AccoladesMarquee from "@/components/accolades-marquee";
 import AccoladesStats from "@/components/accolades-stats";
+import ContactSplit from "@/components/contact-split";
+import ContactStacked from "@/components/contact-stacked";
+import ContactDark from "@/components/contact-dark";
+import ContactMinimal from "@/components/contact-minimal";
 
 export const Route = createFileRoute("/press-kit")({
   component: RouteComponent,
@@ -31,6 +35,11 @@ function RouteComponent() {
       <AccoladesStacked />
       <AccoladesMarquee />
       <AccoladesStats />
+      <ContactSplit />
+      <ContactDark />
+      <ContactMinimal />
+
+      <ContactStacked />
     </div>
   );
 }
