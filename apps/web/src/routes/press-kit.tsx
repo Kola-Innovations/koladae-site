@@ -14,6 +14,8 @@ import ContactSplit from "@/components/contact-split";
 import ContactStacked from "@/components/contact-stacked";
 import ContactDark from "@/components/contact-dark";
 import ContactMinimal from "@/components/contact-minimal";
+import ListenDark from "@/components/listen-dark";
+import ListenMarquee from "@/components/listen-marquee";
 
 export const Route = createFileRoute("/press-kit")({
   component: RouteComponent,
@@ -39,6 +41,8 @@ function RouteComponent() {
       <ContactDark />
       <ContactMinimal />
       <ContactStacked />
+      <ListenDark />
+      <ListenMarquee />
     </div>
   );
 }
