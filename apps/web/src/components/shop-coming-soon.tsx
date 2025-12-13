@@ -11,6 +11,25 @@ interface ShopComingSoonProps {
 const DEFAULT_IMAGE =
   "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?q=80&w=1470&auto=format&fit=crop";
 
+// Pre-generated particle positions
+const PARTICLES = [
+  { id: "p1", left: 12, top: 45, delay: 0.2, duration: 2.5 },
+  { id: "p2", left: 87, top: 23, delay: 1.1, duration: 3.2 },
+  { id: "p3", left: 34, top: 78, delay: 0.8, duration: 2.8 },
+  { id: "p4", left: 56, top: 12, delay: 2.3, duration: 3.5 },
+  { id: "p5", left: 91, top: 67, delay: 0.5, duration: 2.2 },
+  { id: "p6", left: 23, top: 34, delay: 1.7, duration: 3.1 },
+  { id: "p7", left: 67, top: 89, delay: 2.8, duration: 2.6 },
+  { id: "p8", left: 45, top: 56, delay: 0.3, duration: 3.8 },
+  { id: "p9", left: 78, top: 41, delay: 1.9, duration: 2.4 },
+  { id: "p10", left: 8, top: 92, delay: 2.1, duration: 3.3 },
+  { id: "p11", left: 52, top: 18, delay: 0.9, duration: 2.9 },
+  { id: "p12", left: 29, top: 63, delay: 1.4, duration: 3.6 },
+  { id: "p13", left: 83, top: 37, delay: 2.6, duration: 2.3 },
+  { id: "p14", left: 41, top: 84, delay: 0.6, duration: 3.4 },
+  { id: "p15", left: 96, top: 52, delay: 1.2, duration: 2.7 },
+];
+
 export default function ShopComingSoon({
   artistName = "KOLADAE",
   backgroundImage = DEFAULT_IMAGE,
@@ -77,28 +96,139 @@ export default function ShopComingSoon({
           z-index: 15;
           background: repeating-linear-gradient(
             0deg,
-            rgba(0, 0, 0, 0.1),
-            rgba(0, 0, 0, 0.1) 1px,
+            rgba(0, 0, 0, 0.15),
+            rgba(0, 0, 0, 0.15) 1px,
             transparent 1px,
             transparent 2px
           );
         }
 
-        /* Grainy bar - denim texture */
+        /* VHS Tracking lines - horizontal bands that move */
+        .vhs-tracking-shop {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          pointer-events: none;
+          z-index: 8;
+          overflow: hidden;
+        }
+
+        .vhs-line-shop {
+          position: absolute;
+          left: 0;
+          width: 100%;
+          height: 3px;
+          background: linear-gradient(
+            90deg,
+            transparent 0%,
+            rgba(255, 255, 255, 0.1) 10%,
+            rgba(255, 255, 255, 0.3) 50%,
+            rgba(255, 255, 255, 0.1) 90%,
+            transparent 100%
+          );
+          animation: vhsTrackShop 2s linear infinite;
+        }
+
+        @keyframes vhsTrackShop {
+          0% { transform: translateY(-100vh); }
+          100% { transform: translateY(100vh); }
+        }
+
+        /* VHS Color bleed / RGB separation */
+        .vhs-color-bleed-shop {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          pointer-events: none;
+          z-index: 7;
+          mix-blend-mode: screen;
+          opacity: 0.15;
+        }
+
+        .vhs-color-bleed-shop::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: -2px;
+          width: 100%;
+          height: 100%;
+          background: rgba(255, 0, 0, 0.3);
+          animation: colorShiftShop 0.1s steps(2) infinite;
+        }
+
+        .vhs-color-bleed-shop::after {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 2px;
+          width: 100%;
+          height: 100%;
+          background: rgba(0, 255, 255, 0.3);
+          animation: colorShiftShop 0.1s steps(2) infinite reverse;
+        }
+
+        @keyframes colorShiftShop {
+          0% { transform: translateX(0); }
+          50% { transform: translateX(2px); }
+          100% { transform: translateX(-1px); }
+        }
+
+        /* Floating particles */
+        .particles-shop {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          overflow: hidden;
+          z-index: 6;
+        }
+
+        .particle-shop {
+          position: absolute;
+          width: 2px;
+          height: 2px;
+          background: rgba(255, 255, 255, 0.6);
+          border-radius: 50%;
+          animation: floatShop 3s ease-in-out infinite;
+        }
+
+        @keyframes floatShop {
+          0%, 100% {
+            transform: translateY(0) translateX(0);
+            opacity: 0;
+          }
+          10% {
+            opacity: 1;
+          }
+          90% {
+            opacity: 1;
+          }
+          100% {
+            transform: translateY(-100px) translateX(20px);
+            opacity: 0;
+          }
+        }
+
+        /* Faded black denim bar texture - matching home page */
         .grainy-bar-shop {
-          background:
-            linear-gradient(
-              90deg,
-              #c4956a 0%,
-              #d4a574 25%,
-              #c4956a 50%,
-              #b4855a 75%,
-              #c4956a 100%
-            );
+          background: linear-gradient(
+            90deg,
+            rgba(0, 0, 0, 0.7) 0%,
+            rgba(0, 0, 0, 0.6) 20%,
+            rgba(0, 0, 0, 0.55) 50%,
+            rgba(0, 0, 0, 0.6) 80%,
+            rgba(0, 0, 0, 0.7) 100%
+          );
           position: relative;
           overflow: hidden;
         }
 
+        /* Denim weave texture - diagonal lines like fabric */
         .grainy-bar-shop::before {
           content: '';
           position: absolute;
@@ -127,6 +257,7 @@ export default function ShopComingSoon({
           animation: grainMove 0.5s steps(10) infinite;
         }
 
+        /* Subtle fade variation like washed denim */
         .grainy-bar-shop::after {
           content: '';
           position: absolute;
@@ -244,8 +375,49 @@ export default function ShopComingSoon({
       )}
 
       {/* VHS Effects */}
+      {/* Floating particles */}
+      <div className="particles-shop">
+        {PARTICLES.map((particle) => (
+          <div
+            key={particle.id}
+            className="particle-shop"
+            style={{
+              left: `${particle.left}%`,
+              top: `${particle.top}%`,
+              animationDelay: `${particle.delay}s`,
+              animationDuration: `${particle.duration}s`,
+            }}
+          />
+        ))}
+      </div>
+
+      {/* VHS Color bleed / RGB separation */}
+      <div className="vhs-color-bleed-shop" />
+
+      {/* VHS Tracking lines moving down the screen */}
+      <div className="vhs-tracking-shop">
+        <div className="vhs-line-shop" style={{ animationDelay: "0s" }} />
+        <div className="vhs-line-shop" style={{ animationDelay: "0.5s" }} />
+        <div className="vhs-line-shop" style={{ animationDelay: "1s" }} />
+        <div className="vhs-line-shop" style={{ animationDelay: "1.5s" }} />
+      </div>
+
+      {/* Scanlines */}
       <div className="vhs-scanlines-shop" />
+
+      {/* Dark Overlay */}
+      <div
+        className="absolute inset-0"
+        style={{
+          zIndex: 10,
+          background: "rgba(0, 0, 0, 0.5)",
+        }}
+      />
+
+      {/* Vignette */}
       <div className="vignette-shop" />
+
+      {/* Film Grain */}
       <div className="film-grain-shop" />
 
       {/* Content Container */}
