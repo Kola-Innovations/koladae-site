@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "motion/react";
-
+import ContactImage from "@/images/bench_back.png";
 /**
  * Option C: Dark VHS style (like PressKitHero)
  * Black background with TV static/grain effects
@@ -24,12 +24,17 @@ interface ContactDarkProps {
   reversed?: boolean;
 }
 
-const DEFAULT_IMAGE =
-  "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?q=80&w=1470&auto=format&fit=crop";
-
 const defaultContactInfo: ContactInfo[] = [
-  { label: "Management", value: "management@koladae.com", href: "mailto:management@koladae.com" },
-  { label: "Booking", value: "booking@koladae.com", href: "mailto:booking@koladae.com" },
+  {
+    label: "Management",
+    value: "management@koladae.com",
+    href: "mailto:management@koladae.com",
+  },
+  {
+    label: "Booking",
+    value: "booking@koladae.com",
+    href: "mailto:booking@koladae.com",
+  },
 ];
 
 // VHS/Grain styles
@@ -82,7 +87,7 @@ const vhsStyles = `
 export default function ContactDark({
   title = "Contact",
   subtitle = "Get in touch",
-  imageUrl = DEFAULT_IMAGE,
+  imageUrl = ContactImage,
   contactInfo = defaultContactInfo,
   imageOpacity = 0.3,
   accentColor = "#c4956a",
@@ -217,27 +222,37 @@ export default function ContactDark({
             {/* Name & Email Row */}
             <div className="grid gap-6 md:grid-cols-2">
               <div>
-                <label htmlFor="name-dark" className="mb-2 block text-xs font-medium uppercase tracking-wider text-gray-500">
+                <label
+                  htmlFor="name-dark"
+                  className="mb-2 block text-xs font-medium uppercase tracking-wider text-gray-500"
+                >
                   Name
                 </label>
                 <input
                   type="text"
                   id="name-dark"
                   value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, name: e.target.value })
+                  }
                   className="w-full border-b border-gray-700 bg-transparent px-0 py-3 text-white outline-none transition-colors focus:border-white"
                   required
                 />
               </div>
               <div>
-                <label htmlFor="email-dark" className="mb-2 block text-xs font-medium uppercase tracking-wider text-gray-500">
+                <label
+                  htmlFor="email-dark"
+                  className="mb-2 block text-xs font-medium uppercase tracking-wider text-gray-500"
+                >
                   Email
                 </label>
                 <input
                   type="email"
                   id="email-dark"
                   value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, email: e.target.value })
+                  }
                   className="w-full border-b border-gray-700 bg-transparent px-0 py-3 text-white outline-none transition-colors focus:border-white"
                   required
                 />
@@ -246,31 +261,49 @@ export default function ContactDark({
 
             {/* Subject */}
             <div>
-              <label htmlFor="subject-dark" className="mb-2 block text-xs font-medium uppercase tracking-wider text-gray-500">
+              <label
+                htmlFor="subject-dark"
+                className="mb-2 block text-xs font-medium uppercase tracking-wider text-gray-500"
+              >
                 Subject
               </label>
               <select
                 id="subject-dark"
                 value={formData.subject}
-                onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, subject: e.target.value })
+                }
                 className="w-full border-b border-gray-700 bg-transparent px-0 py-3 text-white outline-none transition-colors focus:border-white"
               >
-                <option value="general" className="bg-black">General Inquiry</option>
-                <option value="booking" className="bg-black">Booking</option>
-                <option value="press" className="bg-black">Press</option>
-                <option value="collaboration" className="bg-black">Collaboration</option>
+                <option value="general" className="bg-black">
+                  General Inquiry
+                </option>
+                <option value="booking" className="bg-black">
+                  Booking
+                </option>
+                <option value="press" className="bg-black">
+                  Press
+                </option>
+                <option value="collaboration" className="bg-black">
+                  Collaboration
+                </option>
               </select>
             </div>
 
             {/* Message */}
             <div>
-              <label htmlFor="message-dark" className="mb-2 block text-xs font-medium uppercase tracking-wider text-gray-500">
+              <label
+                htmlFor="message-dark"
+                className="mb-2 block text-xs font-medium uppercase tracking-wider text-gray-500"
+              >
                 Message
               </label>
               <textarea
                 id="message-dark"
                 value={formData.message}
-                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, message: e.target.value })
+                }
                 rows={4}
                 className="w-full resize-none border-b border-gray-700 bg-transparent px-0 py-3 text-white outline-none transition-colors focus:border-white"
                 required

@@ -39,7 +39,7 @@ function MainNav() {
         }
       `}</style>
       <nav
-        className="absolute left-0 right-0 top-12 flex justify-center gap-12"
+        className="absolute left-0 right-0 top-12 flex justify-center gap-12 z-20"
         style={{
           animation: "fadeIn 1s ease forwards",
           animationDelay: "0.5s",
