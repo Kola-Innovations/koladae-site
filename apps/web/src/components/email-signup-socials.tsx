@@ -1,3 +1,4 @@
+import { siteConfig } from "@/config/site";
 import { useState } from "react";
 
 interface EmailSignupSocialsProps {
@@ -67,12 +68,12 @@ const styles = `
 export default function EmailSignupSocials({
   buttonTitle = "Join",
   placeholder = "Enter your email",
-  instagramUrl = "#",
-  tiktokUrl = "#",
-  twitterUrl = "#",
-  spotifyUrl = "#",
-  appleMusicUrl = "#",
-  youtubeUrl = "#",
+  instagramUrl = siteConfig.socials.instagram,
+  tiktokUrl = siteConfig.socials.tiktok,
+  twitterUrl = siteConfig.socials.twitter,
+  spotifyUrl = siteConfig.socials.spotify,
+  appleMusicUrl = siteConfig.socials.appleMusic,
+  youtubeUrl = siteConfig.socials.youtube,
   onSubmit,
 }: EmailSignupSocialsProps) {
   const [email, setEmail] = useState("");

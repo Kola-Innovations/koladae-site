@@ -128,9 +128,9 @@ export default function AccoladesMarquee({
         transition={{ duration: 0.6, delay: 0.2 }}
       >
         <div className="marquee-content">
-          {duplicatedPublications.map((pub, idx) => (
+          {duplicatedPublications.map((pub) => (
             <span
-              key={`${pub}-${idx}`}
+              key={`${pub}`}
               className="mx-8 inline-block text-2xl font-bold uppercase tracking-wider text-white md:mx-12 md:text-3xl"
               style={{ opacity: 0.8 }}
             >
@@ -157,7 +157,7 @@ export default function AccoladesMarquee({
         <div className="space-y-12">
           {featuredQuotes.map((item, idx) => (
             <motion.div
-              key={item.publication + idx}
+              key={item.publication}
               className="border-l-2 py-2 pl-8"
               style={{ borderColor: accentColor }}
               initial={{ opacity: 0, x: -20 }}

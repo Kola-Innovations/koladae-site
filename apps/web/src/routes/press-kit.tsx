@@ -1,23 +1,33 @@
 import AboutSection from "@/components/about-section";
-import PressKitHero from "@/components/press-kit-hero";
-import SongSection from "@/components/song-section";
-import { createFileRoute } from "@tanstack/react-router";
-import video3 from "@/videos/intro-dimsum.mp4";
-import SongSectionStacked from "@/components/song-section-stacked";
-import SongSectionHero from "@/components/song-section-hero";
-import SongSectionAlbum from "@/components/song-section-album";
+import AccoladesMarquee from "@/components/accolades-marquee";
 import AccoladesSplit from "@/components/accolades-split";
 import AccoladesStacked from "@/components/accolades-stacked";
-import AccoladesMarquee from "@/components/accolades-marquee";
 import AccoladesStats from "@/components/accolades-stats";
-import ContactSplit from "@/components/contact-split";
-import ContactStacked from "@/components/contact-stacked";
 import ContactDark from "@/components/contact-dark";
 import ContactMinimal from "@/components/contact-minimal";
+import ContactSplit from "@/components/contact-split";
+import ContactStacked from "@/components/contact-stacked";
 import ListenDark from "@/components/listen-dark";
 import ListenMarquee from "@/components/listen-marquee";
+import PressKitHero from "@/components/press-kit-hero";
+import SongSection from "@/components/song-section";
+import SongSectionAlbum from "@/components/song-section-album";
+import SongSectionHero from "@/components/song-section-hero";
+import SongSectionStacked from "@/components/song-section-stacked";
+import { siteConfig } from "@/config/site";
+import { seo } from "@/utils/seo";
+import video3 from "@/videos/intro-dimsum.mp4";
+import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/press-kit")({
+  head: () => ({
+    meta: [
+      ...seo({
+        ...siteConfig.pages.pressKit,
+        url: "/press-kit",
+      }),
+    ],
+  }),
   component: RouteComponent,
 });
 
