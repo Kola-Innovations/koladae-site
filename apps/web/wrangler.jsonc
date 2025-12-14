@@ -3,6 +3,7 @@
   "name": "koladae-site",
   "compatibility_date": "2025-09-24",
   "compatibility_flags": ["nodejs_compat"],
+  "preview_urls": true,
   "main": "@tanstack/react-start/server-entry",
    "env": {
     "development": {
