@@ -56,6 +56,9 @@ function MainNav() {
         <Link to="/press-kit" className="nav-link">
           Press Kit
         </Link>
+        <Link to="/contact" className="nav-link">
+          Reach Out
+        </Link>
       </nav>
     </>
   );

@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import video1 from "@/videos/ye-ye-ye.mp4";
+import video1 from "@/videos/rolling_press.mp4";
 import video2 from "@/videos/yea-lean-with-it.mp4";
 import video3 from "@/videos/intro-dimsum.mp4";
 // import { Link } from "@tanstack/react-router";
