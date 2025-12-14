@@ -936,7 +936,7 @@ export default function HeroSectionV3({
           }}
         >
           <h1
-            className="text-center font-bold tracking-widest text-white"
+            className="text-center font-bold tracking-widest text-white mt-4"
             style={{
               fontSize: "clamp(1.5rem, 4vw, 2.5rem)",
               letterSpacing: "0.3em",
@@ -988,9 +988,9 @@ export default function HeroSectionV3({
                 delay: 0.3,
               }}
             >
-              {/* COMING label */}
+              {/* COMING label - hidden on mobile */}
               <motion.span
-                className="absolute left-8 top-1/2 -translate-y-1/2 font-bold uppercase tracking-widest"
+                className="absolute left-8 top-1/2 hidden -translate-y-1/2 font-bold uppercase tracking-widest sm:block"
                 style={{
                   fontSize: "clamp(1.2rem, 3vw, 2rem)",
                   color: "rgba(255, 250, 245, 0.9)",
@@ -1018,9 +1018,9 @@ export default function HeroSectionV3({
                 delay: 0.3,
               }}
             >
-              {/* SOON label */}
+              {/* SOON label - hidden on mobile */}
               <motion.span
-                className="absolute right-8 top-1/2 -translate-y-1/2 font-bold uppercase tracking-widest"
+                className="absolute right-8 top-1/2 hidden -translate-y-1/2 font-bold uppercase tracking-widest sm:block"
                 style={{
                   fontSize: "clamp(1.2rem, 3vw, 2rem)",
                   color: "rgba(255, 250, 245, 0.9)",
@@ -1034,9 +1034,9 @@ export default function HeroSectionV3({
               </motion.span>
             </motion.div>
 
-            {/* Rotating Text - Centered */}
+            {/* Rotating Text - Centered (desktop) */}
             <div
-              className="absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2"
+              className="absolute left-1/2 top-1/2 z-10 hidden -translate-x-1/2 -translate-y-1/2 sm:block"
               style={{ minWidth: "300px", textAlign: "center" }}
             >
               <AnimatePresence mode="wait">
@@ -1059,6 +1059,61 @@ export default function HeroSectionV3({
                   {rotatingWords[currentWordIndex]}
                 </motion.span>
               </AnimatePresence>
+            </div>
+
+            {/* Stacked layout - Mobile only */}
+            <div className="absolute left-1/2 top-1/2 z-10 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-1 sm:hidden">
+              {/* COMING - mobile */}
+              <motion.span
+                className="font-bold uppercase tracking-widest"
+                style={{
+                  fontSize: "clamp(0.7rem, 3vw, 1rem)",
+                  color: "rgba(255, 250, 245, 0.9)",
+                  letterSpacing: "0.2em",
+                }}
+                initial={{ opacity: 0 }}
+                animate={barsReady ? { opacity: 1 } : { opacity: 0 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+              >
+                {isReleased ? "OUT" : "COMING"}
+              </motion.span>
+
+              {/* Rotating word - mobile */}
+              <AnimatePresence mode="wait">
+                <motion.span
+                  key={currentWordIndex}
+                  className={enableGlitch && isGlitching ? "glitching" : ""}
+                  style={{
+                    fontSize: "clamp(1.8rem, 8vw, 2.5rem)",
+                    fontWeight: 800,
+                    letterSpacing: "0.05em",
+                    color: "white",
+                    textTransform: "uppercase",
+                    display: "inline-block",
+                  }}
+                  initial={{ opacity: 0 }}
+                  animate={barsReady ? { opacity: 1 } : { opacity: 0 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.1, ease: "easeOut" }}
+                >
+                  {rotatingWords[currentWordIndex]}
+                </motion.span>
+              </AnimatePresence>
+
+              {/* SOON - mobile */}
+              <motion.span
+                className="font-bold uppercase tracking-widest"
+                style={{
+                  fontSize: "clamp(0.7rem, 3vw, 1rem)",
+                  color: "rgba(255, 250, 245, 0.9)",
+                  letterSpacing: "0.2em",
+                }}
+                initial={{ opacity: 0 }}
+                animate={barsReady ? { opacity: 1 } : { opacity: 0 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+              >
+                {isReleased ? "NOW" : "SOON"}
+              </motion.span>
             </div>
           </div>
 
