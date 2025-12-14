@@ -135,7 +135,7 @@ export default function HeroSectionV3({
   }, [currentWordIndex, rotatingWords.length, enableGlitch, barsReady]);
 
   return (
-    <div className="relative h-screen w-full overflow-hidden bg-black">
+    <div className="relative min-h-screen w-full overflow-y-auto bg-black">
       {/* Styles */}
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
@@ -919,7 +919,7 @@ export default function HeroSectionV3({
 
       {/* Content Container */}
       <div
-        className="hero-container relative z-40 flex h-full flex-col items-center justify-between px-8 py-12"
+        className="hero-container relative z-40 flex min-h-screen flex-col items-center justify-between px-8 py-12"
         style={{
           opacity: loaded ? 1 : 0,
           transition: "opacity 0.8s ease",
@@ -969,7 +969,7 @@ export default function HeroSectionV3({
         <MainNav />
 
         {/* Center Section - The Bar + Pre-save */}
-        <div className="flex flex-col items-center gap-6">
+        <div className="flex flex-col items-center gap-6 mb-4">
           <div
             className="relative flex w-screen items-center justify-center"
             style={{ height: "140px" }}
