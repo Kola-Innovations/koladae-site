@@ -112,7 +112,7 @@ function MainNav() {
         <span
           className="hamburger-line"
           style={{
-            transform: isOpen ? "rotate(45deg) translateY(5px)" : "none",
+            transform: isOpen ? "rotate(45deg) translate(0, 8px)" : "none",
           }}
         />
         <span
@@ -124,7 +124,7 @@ function MainNav() {
         <span
           className="hamburger-line"
           style={{
-            transform: isOpen ? "rotate(-45deg) translateY(-5px)" : "none",
+            transform: isOpen ? "rotate(-45deg) translate(0, -8px)" : "none",
           }}
         />
       </button>
