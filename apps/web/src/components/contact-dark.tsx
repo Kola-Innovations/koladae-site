@@ -143,7 +143,7 @@ export default function ContactDark({
 
       {/* Content Container */}
       <div
-        className={`relative z-10 flex min-h-screen flex-col justify-center px-8 py-20 md:px-16 lg:w-1/2 ${
+        className={`relative z-10 flex min-h-screen flex-col justify-center md:px-8 py-20 md:px-16 lg:w-1/2 ${
           reversed ? "ml-auto" : ""
         }`}
       >

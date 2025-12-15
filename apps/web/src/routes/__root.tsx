@@ -77,7 +77,7 @@ function RootDocument() {
 					<Header />
 					<Outlet />
 				</div> */}
-        <div>
+        <div className="">
           <Outlet />
         </div>
         <Toaster richColors />
