@@ -96,7 +96,7 @@ export default function ContactSplit({
 
         {/* Content Panel */}
         <motion.div
-          className="relative flex min-h-screen w-full flex-col justify-center px-8 py-20 lg:w-[45%] lg:px-16"
+          className="section-padding relative flex min-h-screen w-full flex-col justify-center lg:w-[45%]"
           style={{ backgroundColor: bgColor }}
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}

@@ -35,8 +35,16 @@ export default function SongSectionHero({
 
   // Parallax effect for background
   const backgroundY = useTransform(scrollYProgress, [0, 1], ["-20%", "20%"]);
-  const contentOpacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0, 1, 1, 0]);
-  const contentY = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [50, 0, 0, -50]);
+  const contentOpacity = useTransform(
+    scrollYProgress,
+    [0, 0.3, 0.7, 1],
+    [0, 1, 1, 0]
+  );
+  const contentY = useTransform(
+    scrollYProgress,
+    [0, 0.3, 0.7, 1],
+    [50, 0, 0, -50]
+  );
 
   const positionClasses = {
     center: "items-center justify-center text-center",
@@ -84,10 +92,10 @@ export default function SongSectionHero({
 
       {/* Content */}
       <motion.div
-        className={`relative z-10 flex h-full w-full flex-col ${positionClasses[textPosition]}`}
+        className={`relative  z-10 flex h-full w-full flex-col ${positionClasses[textPosition]}`}
         style={{ opacity: contentOpacity, y: contentY }}
       >
-        <div className="max-w-3xl px-8">
+        <div className="max-w-3xl section-padding ">
           {/* Subtitle */}
           <motion.p
             className="mb-4 text-sm font-medium uppercase tracking-[0.3em] text-white/70"

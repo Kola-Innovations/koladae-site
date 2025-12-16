@@ -150,6 +150,11 @@ body {
   }
 }
 
+/* Reusable section padding - responsive horizontal and vertical spacing */
+.section-padding {
+  @apply px-4 py-20 md:px-8 lg:px-16;
+}
+
 /* Overlapping section transitions - sections slide over previous */
 .section-overlap {
   position: relative;

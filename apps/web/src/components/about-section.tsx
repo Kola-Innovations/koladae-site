@@ -171,7 +171,7 @@ export default function AboutSection({
 
         {/* Content Panel */}
         <motion.div
-          className="flex min-h-screen w-full flex-col justify-center px-8 py-20 lg:w-[45%] lg:px-16"
+          className="section-padding flex min-h-screen w-full flex-col justify-center lg:w-[45%]"
           style={{ backgroundColor: actualBgColor }}
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}

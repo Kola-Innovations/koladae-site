@@ -138,7 +138,7 @@ export default function ListenDark({
 
       {/* Content Container */}
       <div
-        className={`relative z-10 flex min-h-screen flex-col justify-center px-8 py-20 md:px-16 lg:w-1/2 ${
+        className={`relative z-10 flex min-h-screen flex-col justify-center lg:w-1/2 ${
           reversed ? "ml-auto" : ""
         }`}
       >
@@ -216,7 +216,9 @@ export default function ListenDark({
                   className="text-sm uppercase tracking-wider transition-colors duration-300"
                   style={{ color: accentColor }}
                   onMouseEnter={(e) => (e.currentTarget.style.color = "white")}
-                  onMouseLeave={(e) => (e.currentTarget.style.color = accentColor)}
+                  onMouseLeave={(e) =>
+                    (e.currentTarget.style.color = accentColor)
+                  }
                 >
                   {social.name}
                 </a>

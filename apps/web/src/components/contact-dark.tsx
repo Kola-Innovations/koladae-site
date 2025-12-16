@@ -143,11 +143,11 @@ export default function ContactDark({
 
       {/* Content Container */}
       <div
-        className={`relative z-10 flex min-h-screen flex-col justify-center  py-20 md:px-16 lg:w-1/2 ${
+        className={`section-padding relative z-10 flex min-h-screen flex-col justify-center lg:w-1/2 ${
           reversed ? "ml-auto" : ""
         }`}
       >
-        <div className="container-main max-w-xl">
+        <div className="max-w-xl">
           {/* Title */}
           <motion.div
             className="mb-10"

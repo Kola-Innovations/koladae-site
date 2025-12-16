@@ -66,7 +66,7 @@ export default function SongSection({
 
           {/* Scrolling Content Panel */}
           <motion.div
-            className="flex min-h-screen w-full flex-col justify-center px-8 py-20 lg:w-[45%] lg:px-16"
+            className="section-padding flex min-h-screen w-full flex-col justify-center lg:w-[45%]"
             style={{ backgroundColor: darkBgColor }}
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -136,7 +136,7 @@ export default function SongSection({
   // Fallback: Original image grid layout
   const darkPanel = (
     <motion.div
-      className="flex flex-1 flex-col justify-center px-8 py-16 md:px-12 lg:px-16"
+      className="section-padding flex flex-1 flex-col justify-center"
       style={{ backgroundColor: darkBgColor }}
       initial={{ opacity: 0, x: reversed ? 30 : -30 }}
       whileInView={{ opacity: 1, x: 0 }}
