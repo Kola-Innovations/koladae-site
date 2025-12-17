@@ -1,3 +1,89 @@
+import ContactImage from "@/images/resto_blue_flip2.png";
+
+export interface Release {
+  title: string;
+  rotatingWords: string[];
+  presaveUrl: string;
+  isReleased: boolean;
+  primaryPhoto: string;
+  isCurrent: boolean;
+  displayOnPdf: boolean;
+  description: string;
+  links: {
+    all: string;
+    spotify: string;
+    appleMusic: string;
+    youtubeMusic: string;
+    amazonMusic: string;
+    tidal: string;
+    deezer: string;
+  };
+}
+export const releases: Release[] = [
+  {
+    title: "Keep Rolling",
+    rotatingWords: ["KEEP", "ON", "ROLLING"],
+    presaveUrl: "#", // UPDATE with actual presave link
+    isReleased: false,
+    primaryPhoto: ContactImage,
+    isCurrent: true,
+    displayOnPdf: true,
+    description: `A soulful track that blends smooth R&B vibes with contemporary production. This song captures the essence of perseverance and the journey of staying true to yourself.
+
+Featuring heartfelt lyrics and a melody that stays with you long after the music stops.`,
+    links: {
+      all: "#",
+      spotify: "#",
+      appleMusic: "#",
+      youtubeMusic: "#",
+      amazonMusic: "#",
+      tidal: "#",
+      deezer: "#",
+    },
+  },
+  {
+    title: "Anabella",
+    rotatingWords: ["ANABELLA"],
+    presaveUrl: "https://music.apple.com/ca/album/anabella-single/1716626323",
+    isReleased: true,
+    primaryPhoto:
+      "https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?q=80&w=1470&auto=format&fit=crop",
+    isCurrent: false,
+    displayOnPdf: true,
+    description: `An afro beat infused R&B track that tells the story of a captivating woman named Anabella, whose charm and allure leave a lasting impression.`,
+    links: {
+      all: "",
+      spotify: "",
+      appleMusic: "",
+      youtubeMusic: "",
+      amazonMusic: "",
+      tidal: "",
+      deezer: "",
+    },
+  },
+  {
+    title: "Yeea Yea Yea",
+    rotatingWords: ["YEA", "YEA", "YEA"],
+    presaveUrl:
+      "https://music.apple.com/ca/album/yea-yea-yea-single/1708974895",
+    isReleased: true,
+    primaryPhoto:
+      "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?q=80&w=1470&auto=format&fit=crop",
+    isCurrent: false,
+    displayOnPdf: true,
+    description: `A catchy R&B anthem that combines upbeat rhythms with infectious melodies. "Yeea Yea Yea" is all about embracing positivity and celebrating life's joyful moments.`,
+    links: {
+      all: "",
+      spotify: "",
+      appleMusic: "",
+      youtubeMusic: "",
+      amazonMusic: "",
+      tidal: "",
+      deezer: "",
+    },
+  },
+];
+
 export const siteConfig = {
   // Basic Info
   name: "KOLADAE",
@@ -39,12 +125,7 @@ export const siteConfig = {
   ],
 
   // Current Release / Hero Section
-  currentRelease: {
-    title: "Keep Rolling",
-    rotatingWords: ["KEEP", "ON", "ROLLING"],
-    presaveUrl: "#", // UPDATE with actual presave link
-    isReleased: false,
-  },
+  currentRelease: releases.filter((release) => release.isCurrent)[0],
 
   // Per-page SEO
   pages: {
