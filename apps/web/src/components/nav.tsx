@@ -1,13 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "@tanstack/react-router";
 import { motion, AnimatePresence } from "motion/react";
-
-const navLinks = [
-  { to: "/", label: "Home" },
-  { to: "/shop", label: "Shop" },
-  { to: "/press-kit", label: "Press Kit" },
-  { to: "/contact", label: "Reach Out" },
-] as const;
+import { siteConfig } from "@/config/site";
 
 function MainNav() {
   const [isOpen, setIsOpen] = useState(false);
@@ -94,7 +88,7 @@ function MainNav() {
           animationFillMode: "forwards",
         }}
       >
-        {navLinks.map((link) => (
+        {siteConfig.navigation.map((link) => (
           <Link key={link.to} to={link.to} className="nav-link">
             {link.label}
           </Link>
@@ -140,7 +134,7 @@ function MainNav() {
             transition={{ duration: 0.3 }}
           >
             <nav className="flex flex-col items-center gap-8">
-              {navLinks.map((link, index) => (
+              {siteConfig.navigation.map((link, index) => (
                 <motion.div
                   key={link.to}
                   initial={{ opacity: 0, y: 20 }}

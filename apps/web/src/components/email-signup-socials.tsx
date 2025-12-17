@@ -112,7 +112,7 @@ export default function EmailSignupSocials({
           {/* Social Icons */}
           <div className="flex items-center gap-5">
             {/* Instagram */}
-            <a href={instagramUrl} className="social-icon" aria-label="Instagram">
+            <a href={instagramUrl} target="_blank" rel="noopener noreferrer" className="social-icon" aria-label="Instagram">
               <svg
                 width="20"
                 height="20"
@@ -134,7 +134,7 @@ export default function EmailSignupSocials({
             </a>
 
             {/* TikTok */}
-            <a href={tiktokUrl} className="social-icon" aria-label="TikTok">
+            <a href={tiktokUrl} target="_blank" rel="noopener noreferrer" className="social-icon" aria-label="TikTok">
               <svg
                 width="20"
                 height="20"
@@ -146,7 +146,7 @@ export default function EmailSignupSocials({
             </a>
 
             {/* Twitter/X */}
-            <a href={twitterUrl} className="social-icon" aria-label="Twitter">
+            <a href={twitterUrl} target="_blank" rel="noopener noreferrer" className="social-icon" aria-label="Twitter">
               <svg
                 width="18"
                 height="18"
@@ -164,7 +164,7 @@ export default function EmailSignupSocials({
           {/* Streaming Icons */}
           <div className="flex items-center gap-5">
             {/* Spotify */}
-            <a href={spotifyUrl} className="social-icon" aria-label="Spotify">
+            <a href={spotifyUrl} target="_blank" rel="noopener noreferrer" className="social-icon" aria-label="Spotify">
               <svg
                 width="20"
                 height="20"
@@ -176,7 +176,7 @@ export default function EmailSignupSocials({
             </a>
 
             {/* Apple Music */}
-            <a href={appleMusicUrl} className="social-icon" aria-label="Apple Music">
+            <a href={appleMusicUrl} target="_blank" rel="noopener noreferrer" className="social-icon" aria-label="Apple Music">
               <svg
                 width="20"
                 height="20"
@@ -188,7 +188,7 @@ export default function EmailSignupSocials({
             </a>
 
             {/* YouTube */}
-            <a href={youtubeUrl} className="social-icon" aria-label="YouTube">
+            <a href={youtubeUrl} target="_blank" rel="noopener noreferrer" className="social-icon" aria-label="YouTube">
               <svg
                 width="22"
                 height="22"

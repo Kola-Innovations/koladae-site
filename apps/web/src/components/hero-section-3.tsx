@@ -6,6 +6,7 @@ import video3 from "@/videos/intro-dimsum.mp4";
 // import { Link } from "@tanstack/react-router";
 import MainNav from "./nav";
 import EmailSignupSocials from "./email-signup-socials";
+import { siteConfig } from "@/config/site";
 
 const VIDEO_SOURCES = [video1, video2, video3];
 const VIDEO_DURATION = 4000; // 8 seconds per video
@@ -62,10 +63,10 @@ interface HeroSectionV3Props {
 }
 
 export default function HeroSectionV3({
-  artistName = "KOLADAE",
-  rotatingWords = ["KEEP", "ON", "ROLLING"],
-  presaveUrl = "#",
-  isReleased = false,
+  artistName = siteConfig.name,
+  rotatingWords = siteConfig.currentRelease.rotatingWords as unknown as string[],
+  presaveUrl = siteConfig.currentRelease.presaveUrl,
+  isReleased = siteConfig.currentRelease.isReleased,
   animatedGrain = true,
   enableGlitch = false,
 }: HeroSectionV3Props) {

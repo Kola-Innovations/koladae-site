@@ -1,4 +1,5 @@
 import { motion } from "motion/react";
+import { getStreamingPlatforms, getSocialLinks } from "@/config/site";
 
 /**
  * Option B: Dark/VHS style Listen section
@@ -28,21 +29,9 @@ interface ListenDarkProps {
   reversed?: boolean;
 }
 
-const defaultStreamingPlatforms: StreamingPlatform[] = [
-  { name: "Spotify", url: "#" },
-  { name: "Apple Music", url: "#" },
-  { name: "YouTube Music", url: "#" },
-  { name: "Amazon Music", url: "#" },
-  { name: "Tidal", url: "#" },
-  { name: "Deezer", url: "#" },
-];
+const defaultStreamingPlatforms: StreamingPlatform[] = getStreamingPlatforms();
 
-const defaultSocialLinks: SocialLink[] = [
-  { name: "Instagram", url: "#" },
-  { name: "TikTok", url: "#" },
-  { name: "Twitter", url: "#" },
-  { name: "YouTube", url: "#" },
-];
+const defaultSocialLinks: SocialLink[] = getSocialLinks();
 
 const DEFAULT_IMAGE =
   "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?q=80&w=1470&auto=format&fit=crop";
@@ -184,6 +173,8 @@ export default function ListenDark({
                 <motion.a
                   key={platform.name}
                   href={platform.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="group flex items-center justify-center border border-gray-700 bg-transparent px-4 py-3 text-xs font-medium uppercase tracking-wider text-white transition-all duration-300 hover:border-white hover:bg-white hover:text-black"
                   initial={{ opacity: 0, y: 10 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -213,6 +204,8 @@ export default function ListenDark({
                 <a
                   key={social.name}
                   href={social.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-sm uppercase tracking-wider transition-colors duration-300"
                   style={{ color: accentColor }}
                   onMouseEnter={(e) => (e.currentTarget.style.color = "white")}

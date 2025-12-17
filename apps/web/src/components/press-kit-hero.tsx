@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "motion/react";
 import MainNav from "./nav";
+import { siteConfig } from "@/config/site";
 
 const DEFAULT_IMAGE_URL =
   "https://images.unsplash.com/photo-1657042855066-7f09c6c2c350?q=80&w=1335&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
@@ -12,7 +13,7 @@ interface PressKitHeroProps {
 }
 
 export default function PressKitHero({
-  artistName = "KOLADAE",
+  artistName = siteConfig.name,
   imageUrl = DEFAULT_IMAGE_URL,
   imageOpacity = 0.3,
 }: PressKitHeroProps) {

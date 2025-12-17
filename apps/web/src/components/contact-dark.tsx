@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion } from "motion/react";
 import ContactImage from "@/images/bench_back.png";
+import { getContactInfo } from "@/config/site";
 /**
  * Option C: Dark VHS style (like PressKitHero)
  * Black background with TV static/grain effects
@@ -24,18 +25,7 @@ interface ContactDarkProps {
   reversed?: boolean;
 }
 
-const defaultContactInfo: ContactInfo[] = [
-  {
-    label: "Management",
-    value: "management@koladae.com",
-    href: "mailto:management@koladae.com",
-  },
-  {
-    label: "Booking",
-    value: "booking@koladae.com",
-    href: "mailto:booking@koladae.com",
-  },
-];
+const defaultContactInfo: ContactInfo[] = getContactInfo();
 
 // VHS/Grain styles
 const vhsStyles = `
