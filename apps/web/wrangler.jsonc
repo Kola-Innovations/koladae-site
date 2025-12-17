@@ -5,6 +5,9 @@
   "compatibility_flags": ["nodejs_compat"],
   "preview_urls": true,
   "main": "@tanstack/react-start/server-entry",
+  "observability": {
+    "enabled": true
+  },
    "env": {
     "development": {
      "name": "koladae-site-dev",
