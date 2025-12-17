@@ -60,12 +60,15 @@ function RouteComponent() {
         description={currentRelease?.description.split("\n\n")}
         reversed
         videoOpacity={0.4}
+        buttonText={currentRelease?.isReleased ? "Listen Now" : "Pre-save Now"}
+        listenUrl={currentRelease?.links.all}
       />
       <SongSectionHero
         title={track2?.title || "Track Two"}
         subtitle=""
         backgroundVideo={track2?.primaryVideo}
         description={track2?.description}
+        listenUrl={track2?.links.all}
       />
       {/* <SongSection
         videoUrl={video3}
@@ -81,6 +84,7 @@ function RouteComponent() {
         description={track3.description.split("\n\n")}
         releaseDate={track3.releaseYear.toString()}
         artist={track3.artists.join(", ")}
+        streamingLinks={track3.links}
       />
       <ListenDark subtitle="To Koladae Everywhere" />
       {/* <ListenMarquee /> */}

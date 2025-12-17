@@ -64,8 +64,9 @@ interface HeroSectionV3Props {
 
 export default function HeroSectionV3({
   artistName = siteConfig.name,
-  rotatingWords = siteConfig.currentRelease.rotatingWords as unknown as string[],
-  presaveUrl = siteConfig.currentRelease.presaveUrl,
+  rotatingWords = siteConfig.currentRelease
+    .rotatingWords as unknown as string[],
+  // presaveUrl = siteConfig.currentRelease.presaveUrl,
   isReleased = siteConfig.currentRelease.isReleased,
   animatedGrain = true,
   enableGlitch = false,
@@ -1150,7 +1151,8 @@ export default function HeroSectionV3({
             </AnimatePresence>
 
             <motion.a
-              href={presaveUrl}
+              href={siteConfig.currentRelease.links.all}
+              target="_blank"
               className="cta-btn"
               initial={{ opacity: 0, y: 10 }}
               animate={barsReady ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}

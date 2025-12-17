@@ -302,7 +302,7 @@ export default function PressKitHero({
           font-size: clamp(0.875rem, 2vw, 1.25rem);
           font-weight: 400;
           letter-spacing: 0.3em;
-          color: rgba(255, 255, 255, 0.8);
+          color: #c4956a;
           text-transform: uppercase;
         }
 

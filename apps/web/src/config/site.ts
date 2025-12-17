@@ -5,7 +5,6 @@ import anabellaVid from "@/videos/anabella_cover_vid.mp4";
 export interface Release {
   title: string;
   rotatingWords: string[];
-  presaveUrl?: string;
   isReleased: boolean;
   primaryPhoto?: string;
   primaryVideo?: string;
@@ -15,6 +14,7 @@ export interface Release {
   artists: string[];
   releaseYear: number;
   links: {
+    // use this as presave link if isReleased is false
     all: string;
     spotify: string;
     appleMusic: string;
@@ -29,7 +29,7 @@ export const releases: Release[] = [
     releaseYear: 2025,
     title: "Keep Rolling",
     rotatingWords: ["KEEP", "ON", "ROLLING"],
-    presaveUrl: "#", // UPDATE with actual presave link
+    // presaveUrl: "", // UPDATE with actual presave link
     isReleased: false,
     primaryPhoto: ContactImage,
     isCurrent: true,
@@ -42,7 +42,7 @@ The song reflects the daily choice to keep moving despite pressure, pain, or fea
 
 This isn't a sad song; it's a resilience anthem. It’s for anyone fighting a silent battle, waking up to pressure and pain, but choosing to lace up their shoes anyway. It’s a reminder that no matter the obstacle, we keep rolling.`,
     links: {
-      all: "#",
+      all: "https://temple.groover.co/koladae",
       spotify: "#",
       appleMusic: "#",
       youtubeMusic: "#",
@@ -56,15 +56,16 @@ This isn't a sad song; it's a resilience anthem. It’s for anyone fighting a si
     releaseYear: 2025,
     title: "Anabella",
     rotatingWords: ["ANABELLA"],
-    presaveUrl: "https://music.apple.com/ca/album/anabella-single/1716626323",
+    // presaveUrl: "https://music.apple.com/ca/album/anabella-single/1716626323",
     isReleased: true,
     primaryVideo: anabellaVid,
     isCurrent: false,
     displayOnPdf: true,
     description: `A hypnotic Afrobeat track by Koladae that explores the dizzying pull of desire. Driven by pulsing percussion and a haunting chorus, the song captures the tension between craving and chaos—someone who burns and soothes all at once. Blending Nigerian rhythms with Western influences, “Anabella” marks Koladae’s return to the mic, delivering a sound that’s seductive, cross-cultural, and emotionally honest.`,
     links: {
-      all: "",
-      spotify: "",
+      all: "https://hypeddit.com/koladae/anabella",
+      spotify:
+        "https://open.spotify.com/track/6QMJ8ZLBTh1ZWs2DVJcdxh?si=VYsRcv2xQ-Gcb94rALcyng",
       appleMusic: "",
       youtubeMusic: "",
       amazonMusic: "",
@@ -86,13 +87,16 @@ This isn't a sad song; it's a resilience anthem. It’s for anyone fighting a si
 
 Lyrically, the song offers a tongue-in-cheek look at the fantasy of “making it”—late nights, loud crowds, vices, and unfamiliar faces—while quietly questioning what’s real beneath the smoke. The repetitive, chant-ready chorus mirrors the cycle of indulgence and momentum, making the track both hypnotic and instantly catchy. Perfect for summer nights, “Yeah Yeah Yeah” balances celebration with self-awareness, reflecting the blurred line between freedom, excess, and purpose.`,
     links: {
-      all: "",
-      spotify: "",
-      appleMusic: "",
-      youtubeMusic: "",
-      amazonMusic: "",
-      tidal: "",
-      deezer: "",
+      all: "https://hypeddit.com/yeahyeahyeah",
+      spotify:
+        "https://open.spotify.com/track/28Hqxnw6TkbPX6uyax9TPv?si=4m0ErkbKSYmbEkh66p5Dhw",
+      appleMusic:
+        "https://music.apple.com/us/album/oh-yeah/1703684273?i=1703684281&uo=4",
+      youtubeMusic: "https://music.youtube.com/watch?v=wZQgUXQrXF4",
+      amazonMusic:
+        "https://music.amazon.com/albums/B0F84JDP5K?trackAsin=B0F84FSHSN",
+      tidal: "https://listen.tidal.com/track/434989425",
+      deezer: "https://www.deezer.com/track/3360603981",
     },
     artists: ["Takes a Village Music, Nilo Blues, Koladae, Shyo"],
   },
@@ -118,10 +122,11 @@ export const siteConfig = {
     spotify: "https://open.spotify.com/artist/4tVQpJprSrjd2RQQf2XQJM",
     appleMusic: "https://music.apple.com/ca/artist/koladae/1708974896", // e.g., "https://music.apple.com/artist/..."
     youtube: "https://www.youtube.com/@Koladae", // e.g., "https://youtube.com/@koladae"
-    youtubeMusic: "#", // e.g., "https://music.youtube.com/channel/..."
-    amazonMusic: "", // e.g., "https://music.amazon.com/artists/..."
-    tidal: "#", // e.g., "https://tidal.com/artist/..."
-    deezer: "#", // e.g., "https://deezer.com/artist/..."
+    // TODO: get real youtube link
+    youtubeMusic: "https://www.youtube.com/@Koladae", // e.g., ..."
+    amazonMusic: "https://music.amazon.ca/artists/B0CJSS11GW/koladae", // e.g., "https://music.amazon.com/artists/..."
+    tidal: "https://tidal.com/artist/42341469", // e.g., "https://tidal.com/artist/..."
+    deezer: "https://www.deezer.com/en/artist/232312391",
   },
 
   // Contact - UPDATE THESE
