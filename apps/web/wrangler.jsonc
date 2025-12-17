@@ -36,7 +36,7 @@
     //   ],
     // },
     "production": {
-       "name": "koladae-site-prod",
+       "name": "koladae-site",
      "vars": {
        "TEST": "Hello from Cloudflare - prod"
      },
