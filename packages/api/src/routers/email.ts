@@ -37,7 +37,7 @@ export const emailRouter = {
 
       // Send welcome email with template
       const { error: emailError } = await resend.emails.send({
-        from: "KOLADAE <noreply@koladae.com>",
+        from: "KOLADAE <fans@koladae.com>",
         to: input.email,
         // subject: "Welcome to KOLADAE",
         template: {
