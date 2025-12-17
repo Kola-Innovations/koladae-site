@@ -84,8 +84,12 @@ export default function EmailSignupSocials({
     setIsLoading(true);
 
     try {
-      await client.email.subscribe({ email });
-      toast.success("You're on the list!");
+      const result = await client.email.subscribe({ email });
+      if (result.alreadySubscribed) {
+        toast.info("Already on the list!");
+      } else {
+        toast.success("You're on the list!");
+      }
       setEmail("");
     } catch (e) {
       console.error(e);
@@ -110,7 +114,23 @@ export default function EmailSignupSocials({
             required
           />
           <button type="submit" className="email-btn" disabled={isLoading}>
-            {isLoading ? "..." : buttonTitle}
+            {isLoading ? (
+              <svg
+                className="animate-spin"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                aria-label="Loading"
+              >
+                <title>Loading</title>
+                <path d="M12 2v4m0 12v4m10-10h-4M6 12H2m15.07-5.07l-2.83 2.83M8.76 15.24l-2.83 2.83m11.31 0l-2.83-2.83M8.76 8.76L5.93 5.93" />
+              </svg>
+            ) : (
+              buttonTitle
+            )}
           </button>
         </form>
 
