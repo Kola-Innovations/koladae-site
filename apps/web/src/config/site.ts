@@ -1,14 +1,19 @@
 import ContactImage from "@/images/resto_blue_flip2.png";
-
+import YeaCoverArt from "@/images/yea_cover.jpg";
+import YeaYeaVid from "@/videos/intro-dimsum.mp4";
+import anabellaVid from "@/videos/anabella_cover_vid.mp4";
 export interface Release {
   title: string;
   rotatingWords: string[];
-  presaveUrl: string;
+  presaveUrl?: string;
   isReleased: boolean;
-  primaryPhoto: string;
+  primaryPhoto?: string;
+  primaryVideo?: string;
   isCurrent: boolean;
   displayOnPdf: boolean;
   description: string;
+  artists: string[];
+  releaseYear: number;
   links: {
     all: string;
     spotify: string;
@@ -21,6 +26,7 @@ export interface Release {
 }
 export const releases: Release[] = [
   {
+    releaseYear: 2025,
     title: "Keep Rolling",
     rotatingWords: ["KEEP", "ON", "ROLLING"],
     presaveUrl: "#", // UPDATE with actual presave link
@@ -28,9 +34,13 @@ export const releases: Release[] = [
     primaryPhoto: ContactImage,
     isCurrent: true,
     displayOnPdf: true,
-    description: `A soulful track that blends smooth R&B vibes with contemporary production. This song captures the essence of perseverance and the journey of staying true to yourself.
+    description: `I wrote this song a couple weeks before surgery to remove tumours after a thyroid cancer diagnosis. 
 
-Featuring heartfelt lyrics and a melody that stays with you long after the music stops.`,
+Facing that uncertainty, I needed an escape. I channeled that fear into warm 70s funk/soul textures, lush Rhodes, and R&B grooves.
+
+The song reflects the daily choice to keep moving despite pressure, pain, or fear. “Keep Rolling” is for anyone carrying silent battles,  a reminder that even in heavy moments, forward motion is still possible.
+
+This isn't a sad song; it's a resilience anthem. It’s for anyone fighting a silent battle, waking up to pressure and pain, but choosing to lace up their shoes anyway. It’s a reminder that no matter the obstacle, we keep rolling.`,
     links: {
       all: "#",
       spotify: "#",
@@ -40,17 +50,18 @@ Featuring heartfelt lyrics and a melody that stays with you long after the music
       tidal: "#",
       deezer: "#",
     },
+    artists: ["KOLADAE"],
   },
   {
+    releaseYear: 2025,
     title: "Anabella",
     rotatingWords: ["ANABELLA"],
     presaveUrl: "https://music.apple.com/ca/album/anabella-single/1716626323",
     isReleased: true,
-    primaryPhoto:
-      "https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?q=80&w=1470&auto=format&fit=crop",
+    primaryVideo: anabellaVid,
     isCurrent: false,
     displayOnPdf: true,
-    description: `An afro beat infused R&B track that tells the story of a captivating woman named Anabella, whose charm and allure leave a lasting impression.`,
+    description: `A hypnotic Afrobeat track by Koladae that explores the dizzying pull of desire. Driven by pulsing percussion and a haunting chorus, the song captures the tension between craving and chaos—someone who burns and soothes all at once. Blending Nigerian rhythms with Western influences, “Anabella” marks Koladae’s return to the mic, delivering a sound that’s seductive, cross-cultural, and emotionally honest.`,
     links: {
       all: "",
       spotify: "",
@@ -60,18 +71,20 @@ Featuring heartfelt lyrics and a melody that stays with you long after the music
       tidal: "",
       deezer: "",
     },
+    artists: ["KOLADAE"],
   },
   {
-    title: "Yeea Yea Yea",
+    releaseYear: 2025,
+    title: "Yeah Yeah Yeah",
     rotatingWords: ["YEA", "YEA", "YEA"],
-    presaveUrl:
-      "https://music.apple.com/ca/album/yea-yea-yea-single/1708974895",
     isReleased: true,
-    primaryPhoto:
-      "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?q=80&w=1470&auto=format&fit=crop",
+    primaryPhoto: YeaCoverArt,
+    primaryVideo: YeaYeaVid,
     isCurrent: false,
     displayOnPdf: true,
-    description: `A catchy R&B anthem that combines upbeat rhythms with infectious melodies. "Yeea Yea Yea" is all about embracing positivity and celebrating life's joyful moments.`,
+    description: `“Yeah Yeah Yeah” is an upbeat R&B collaboration from the Takes a Village Music collective, born out of a late-night Potluck session and powered by pure creative chemistry. Built on bouncy drums, hazy keys, and hip-hop–leaning rhythms, the track captures the thrill and disorientation of chasing success once the doors start opening.
+
+Lyrically, the song offers a tongue-in-cheek look at the fantasy of “making it”—late nights, loud crowds, vices, and unfamiliar faces—while quietly questioning what’s real beneath the smoke. The repetitive, chant-ready chorus mirrors the cycle of indulgence and momentum, making the track both hypnotic and instantly catchy. Perfect for summer nights, “Yeah Yeah Yeah” balances celebration with self-awareness, reflecting the blurred line between freedom, excess, and purpose.`,
     links: {
       all: "",
       spotify: "",
@@ -81,6 +94,7 @@ Featuring heartfelt lyrics and a melody that stays with you long after the music
       tidal: "",
       deezer: "",
     },
+    artists: ["Takes a Village Music, Nilo Blues, Koladae, Shyo"],
   },
 ];
 
@@ -144,6 +158,14 @@ export const siteConfig = {
       description:
         "Shop official KOLADAE merchandise. Coming soon - exclusive apparel, accessories, and limited edition items.",
     },
+  },
+  about: {
+    title: "About",
+    description: `Koladae is a Nigerian-born, Canadian-raised artist blending Afro rhythms with emotionally rich storytelling. Rooted in both African and Western influences, his music lives in the space between movement and reflection, where lush grooves meet raw, honest emotion.
+
+After years working behind the scenes as a songwriter, producer, and creative, and spending much of his life in corporate environments that demanded he mute parts of himself, Koladae is now fully stepping into his voice. His sound moves effortlessly from feel-good, late-night anthems to intimate confessionals, reflecting the complexity of healing, love, identity, and becoming.
+
+Visually and sonically, Koladae represents rebirth and self-acceptance. With his natural hair, bold aesthetic, and unfiltered lyrics, he shows up as his full self, unapologetic and present. Music has always been his way to feel, process, and heal. Now, he’s inviting listeners into that journey.`,
   },
 } as const;
 

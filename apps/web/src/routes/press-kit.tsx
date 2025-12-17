@@ -1,26 +1,26 @@
 import AboutSection from "@/components/about-section";
 import AccoladesMarquee from "@/components/accolades-marquee";
-import AccoladesSplit from "@/components/accolades-split";
-import AccoladesStacked from "@/components/accolades-stacked";
-import AccoladesStats from "@/components/accolades-stats";
+// import AccoladesSplit from "@/components/accolades-split";
+// import AccoladesStacked from "@/components/accolades-stacked";
+// import AccoladesStats from "@/components/accolades-stats";
 import ContactDark from "@/components/contact-dark";
-import ContactMinimal from "@/components/contact-minimal";
-import ContactSplit from "@/components/contact-split";
-import ContactStacked from "@/components/contact-stacked";
+// import ContactMinimal from "@/components/contact-minimal";
+// import ContactSplit from "@/components/contact-split";
+// import ContactStacked from "@/components/contact-stacked";
 import ListenDark from "@/components/listen-dark";
-import ListenMarquee from "@/components/listen-marquee";
+// import ListenMarquee from "@/components/listen-marquee";
 import PressKitHero from "@/components/press-kit-hero";
 import SongSection from "@/components/song-section";
-import SongSectionAlbum from "@/components/song-section-album";
+// import SongSectionAlbum from "@/components/song-section-album";
 import SongSectionHero from "@/components/song-section-hero";
 import SongSectionStacked from "@/components/song-section-stacked";
-import { siteConfig } from "@/config/site";
+import { siteConfig, releases } from "@/config/site";
 import { seo } from "@/utils/seo";
-import video3 from "@/videos/intro-dimsum.mp4";
+
 import { createFileRoute } from "@tanstack/react-router";
 import restoblue from "@/images/resto_blue_flip2.png";
 import pic2 from "@/images/side_look.png";
-import anabellaVid from "@/videos/anabella_cover_vid.mp4";
+
 import RollingPress from "@/videos/rolling_press.mp4";
 import ContactImage from "@/images/bench_back.png";
 
@@ -37,6 +37,9 @@ export const Route = createFileRoute("/press-kit")({
 });
 
 function RouteComponent() {
+  const currentRelease = releases.find((release) => release.isCurrent);
+  const track2 = releases.filter((release) => !release.isCurrent)[0];
+  const track3 = releases.filter((release) => !release.isCurrent)[1];
   return (
     <div>
       <PressKitHero
@@ -45,18 +48,24 @@ function RouteComponent() {
         // imageOpacity={0.6}
         // imageUrl="https://plus.unsplash.com/premium_photo-1683299265520-928021064f4c?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzN8fG11c2ljJTIwYXJ0aXN0fGVufDB8fDB8fHww"
       />
-      <AboutSection bgColor="cream" imageUrl={pic2} />
+      <AboutSection
+        bgColor="cream"
+        imageUrl={pic2}
+        title={siteConfig.about.title}
+        description={siteConfig.about.description.split("\n\n")}
+      />
       <SongSection
-        title="Keep Rolling"
+        title={currentRelease?.title || "Current Release"}
         videoUrl={RollingPress}
+        description={currentRelease?.description.split("\n\n")}
         reversed
         videoOpacity={0.4}
       />
       <SongSectionHero
-        title="Anabella"
+        title={track2?.title || "Track Two"}
         subtitle=""
-        backgroundVideo={anabellaVid}
-        description="An afro beat infused R&B track that tells the story of a captivating woman named Anabella, whose charm and allure leave a lasting impression."
+        backgroundVideo={track2?.primaryVideo}
+        description={track2?.description}
       />
       {/* <SongSection
         videoUrl={video3}
@@ -65,7 +74,14 @@ function RouteComponent() {
         // darkBgColor="#8b7d6b"
       /> */}
 
-      <SongSectionStacked headerVideo={video3} title="Yea Yea Yea" />
+      <SongSectionStacked
+        headerVideo={track3.primaryVideo}
+        coverImage={track3.primaryPhoto}
+        title={track3.title}
+        description={track3.description.split("\n\n")}
+        releaseDate={track3.releaseYear.toString()}
+        artist={track3.artists.join(", ")}
+      />
       <ListenDark subtitle="To Koladae Everywhere" />
       {/* <ListenMarquee /> */}
       {/* <SongSectionAlbum /> */}

@@ -95,7 +95,7 @@ export default function SongSectionHero({
         className={`relative  z-10 flex h-full w-full flex-col ${positionClasses[textPosition]}`}
         style={{ opacity: contentOpacity, y: contentY }}
       >
-        <div className="max-w-3xl section-padding ">
+        <div className=" section-padding  max-w-5xl">
           {/* Subtitle */}
           <motion.p
             className="mb-4 text-sm font-medium uppercase tracking-[0.3em] text-white/70"
@@ -125,7 +125,7 @@ export default function SongSectionHero({
 
           {/* Description */}
           <motion.p
-            className="mb-10 max-w-xl text-lg text-white/80 md:text-xl"
+            className="mb-10  text-lg text-white/80 md:text-xl"
             style={{ lineHeight: 1.6 }}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}

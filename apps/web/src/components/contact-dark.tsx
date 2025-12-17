@@ -2,6 +2,8 @@ import { useState } from "react";
 import { motion } from "motion/react";
 import ContactImage from "@/images/bench_back.png";
 import { getContactInfo } from "@/config/site";
+import { client } from "@/utils/orpc";
+import { toast } from "sonner";
 /**
  * Option C: Dark VHS style (like PressKitHero)
  * Black background with TV static/grain effects
@@ -89,10 +91,22 @@ export default function ContactDark({
     subject: "general",
     message: "",
   });
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
+    setIsLoading(true);
+
+    try {
+      await client.email.contact(formData);
+      toast.success("Message sent! We'll get back to you soon.");
+      setFormData({ name: "", email: "", subject: "general", message: "" });
+    } catch (error) {
+      console.error(error);
+      toast.error("Failed to send message. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -303,18 +317,33 @@ export default function ContactDark({
             {/* Submit Button */}
             <motion.button
               type="submit"
-              className="mt-6 border px-10 py-4 text-sm font-medium uppercase tracking-wider transition-all duration-300"
+              disabled={isLoading}
+              className="mt-6 border px-10 py-4 text-sm font-medium uppercase tracking-wider transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-50"
               style={{
                 borderColor: accentColor,
                 color: accentColor,
               }}
-              whileHover={{
+              whileHover={isLoading ? {} : {
                 backgroundColor: accentColor,
                 color: "black",
               }}
-              whileTap={{ scale: 0.98 }}
+              whileTap={isLoading ? {} : { scale: 0.98 }}
             >
-              Send Message
+              {isLoading ? (
+                <svg
+                  className="h-5 w-5 animate-spin"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  aria-label="Sending"
+                >
+                  <title>Sending</title>
+                  <path d="M12 2v4m0 12v4m10-10h-4M6 12H2m15.07-5.07l-2.83 2.83M8.76 15.24l-2.83 2.83m11.31 0l-2.83-2.83M8.76 8.76L5.93 5.93" />
+                </svg>
+              ) : (
+                "Send Message"
+              )}
             </motion.button>
           </motion.form>
         </div>

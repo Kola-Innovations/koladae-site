@@ -7,6 +7,38 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export const emailRouter = {
+  contact: publicProcedure
+    .input(
+      z.object({
+        name: z.string().min(1),
+        email: z.string().email(),
+        subject: z.string().min(1),
+        message: z.string().min(1),
+      })
+    )
+    .handler(async ({ input }) => {
+      const subjectMap: Record<string, string> = {
+        general: "General Inquiry",
+        booking: "Booking",
+        press: "Press",
+        collaboration: "Collaboration",
+      };
+
+      const { error } = await resend.emails.send({
+        from: "KOLADAE Website <fans@koladae.com>",
+        to: "management@koladae.com",
+        subject: `[${subjectMap[input.subject] || input.subject}] Contact from ${input.name}`,
+        replyTo: input.email,
+        text: `Name: ${input.name}\nEmail: ${input.email}\nSubject: ${subjectMap[input.subject] || input.subject}\n\nMessage:\n${input.message}`,
+      });
+
+      if (error) {
+        throw new Error(`Failed to send contact email: ${error.message}`);
+      }
+
+      return { success: true };
+    }),
+
   subscribe: publicProcedure
     .input(z.object({ email: z.string().email() }))
     .handler(async ({ input }) => {
