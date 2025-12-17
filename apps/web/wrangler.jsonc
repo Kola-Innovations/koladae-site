@@ -3,16 +3,54 @@
   "name": "koladae-site",
   "compatibility_date": "2025-09-24",
   "compatibility_flags": ["nodejs_compat"],
+  "preview_urls": true,
   "main": "@tanstack/react-start/server-entry",
-  "vars": {
-    "MY_VAR": "Hello from Cloudflare"
+  "observability": {
+    "enabled": true
   },
    "env": {
-    "dev": {
-     "name": "koladae-site-dev"
+    "development": {
+     "name": "koladae-site-dev",
+     "vars": {
+       "TEST": "Hello from Cloudflare - dev"
+     },
+       // POSTGRES_URL_POOLED, POSTGRES_URL
+      "routes": [
+        {
+          "pattern": "dev.koladae.com/*",
+          "zone_name": "koladae.com",
+        },
+      ],
     },
+    // "staging": {
+    //   "name": "koladae-site-stg",
+    //  "vars": {
+    //    "TEST": "Hello from Cloudflare - stg"
+    //  },
+    //    // POSTGRES_URL_POOLED, POSTGRES_URL
+    //   "routes": [
+    //     {
+    //       "pattern": "dev.koladae.com/*",
+    //       "zone_name": "koladae.com",
+    //     },
+    //   ],
+    // },
     "production": {
-      "name": "koladae-site-prod"
+       "name": "koladae-site-prod",
+     "vars": {
+       "TEST": "Hello from Cloudflare - prod"
+     },
+       // POSTGRES_URL_POOLED, POSTGRES_URL
+      "routes": [
+        {
+          "pattern": "koladae.com/*",
+          "zone_name": "koladae.com",
+        },
+          {
+          "pattern": "www.koladae.com/*",
+          "zone_name": "koladae.com",
+        },
+      ],
     }
   }
 }
