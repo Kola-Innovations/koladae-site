@@ -1,5 +1,7 @@
 import { siteConfig } from "@/config/site";
+import { client } from "@/utils/orpc";
 import { useState } from "react";
+import { toast } from "sonner";
 
 interface EmailSignupSocialsProps {
   buttonTitle?: string;
@@ -10,7 +12,6 @@ interface EmailSignupSocialsProps {
   spotifyUrl?: string;
   appleMusicUrl?: string;
   youtubeUrl?: string;
-  onSubmit?: (email: string) => void;
 }
 
 const styles = `
@@ -74,18 +75,24 @@ export default function EmailSignupSocials({
   spotifyUrl = siteConfig.socials.spotify,
   appleMusicUrl = siteConfig.socials.appleMusic,
   youtubeUrl = siteConfig.socials.youtube,
-  onSubmit,
 }: EmailSignupSocialsProps) {
   const [email, setEmail] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleEmailSubmit = (e: React.FormEvent) => {
+  const handleEmailSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (onSubmit) {
-      onSubmit(email);
-    } else {
-      console.log("Email submitted:", email);
+    setIsLoading(true);
+
+    try {
+      await client.email.subscribe({ email });
+      toast.success("You're on the list!");
+      setEmail("");
+    } catch (e) {
+      console.error(e);
+      toast.error("Something went wrong. Please try again.");
+    } finally {
+      setIsLoading(false);
     }
-    setEmail("");
   };
 
   return (
@@ -102,8 +109,8 @@ export default function EmailSignupSocials({
             className="email-input"
             required
           />
-          <button type="submit" className="email-btn">
-            {buttonTitle}
+          <button type="submit" className="email-btn" disabled={isLoading}>
+            {isLoading ? "..." : buttonTitle}
           </button>
         </form>
 
@@ -112,7 +119,13 @@ export default function EmailSignupSocials({
           {/* Social Icons */}
           <div className="flex items-center gap-5">
             {/* Instagram */}
-            <a href={instagramUrl} target="_blank" rel="noopener noreferrer" className="social-icon" aria-label="Instagram">
+            <a
+              href={instagramUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="social-icon"
+              aria-label="Instagram"
+            >
               <svg
                 width="20"
                 height="20"
@@ -134,7 +147,13 @@ export default function EmailSignupSocials({
             </a>
 
             {/* TikTok */}
-            <a href={tiktokUrl} target="_blank" rel="noopener noreferrer" className="social-icon" aria-label="TikTok">
+            <a
+              href={tiktokUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="social-icon"
+              aria-label="TikTok"
+            >
               <svg
                 width="20"
                 height="20"
@@ -146,7 +165,13 @@ export default function EmailSignupSocials({
             </a>
 
             {/* Twitter/X */}
-            <a href={twitterUrl} target="_blank" rel="noopener noreferrer" className="social-icon" aria-label="Twitter">
+            <a
+              href={twitterUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="social-icon"
+              aria-label="Twitter"
+            >
               <svg
                 width="18"
                 height="18"
@@ -164,7 +189,13 @@ export default function EmailSignupSocials({
           {/* Streaming Icons */}
           <div className="flex items-center gap-5">
             {/* Spotify */}
-            <a href={spotifyUrl} target="_blank" rel="noopener noreferrer" className="social-icon" aria-label="Spotify">
+            <a
+              href={spotifyUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="social-icon"
+              aria-label="Spotify"
+            >
               <svg
                 width="20"
                 height="20"
@@ -176,7 +207,13 @@ export default function EmailSignupSocials({
             </a>
 
             {/* Apple Music */}
-            <a href={appleMusicUrl} target="_blank" rel="noopener noreferrer" className="social-icon" aria-label="Apple Music">
+            <a
+              href={appleMusicUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="social-icon"
+              aria-label="Apple Music"
+            >
               <svg
                 width="20"
                 height="20"
@@ -188,7 +225,13 @@ export default function EmailSignupSocials({
             </a>
 
             {/* YouTube */}
-            <a href={youtubeUrl} target="_blank" rel="noopener noreferrer" className="social-icon" aria-label="YouTube">
+            <a
+              href={youtubeUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="social-icon"
+              aria-label="YouTube"
+            >
               <svg
                 width="22"
                 height="22"
