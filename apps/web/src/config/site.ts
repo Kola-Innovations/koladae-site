@@ -114,7 +114,7 @@ export const siteConfig = {
 
   // URLs - UPDATE THIS
   url: "https://koladae.com",
-  ogImage: "/og-image.jpg",
+  ogImage: releases.filter((release) => release.isCurrent)[0].primaryPhoto,
 
   // Social & Streaming Links - UPDATE THESE
   socials: {
