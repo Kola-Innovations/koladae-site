@@ -1,4 +1,9 @@
 import { Toaster } from "@/components/ui/sonner";
+import { siteConfig } from "@/config/site";
+import {
+  getArtistStructuredData,
+  getWebsiteStructuredData,
+} from "@/utils/structured-data";
 
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
@@ -9,7 +14,6 @@ import {
   createRootRouteWithContext,
 } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
-import Header from "../components/header";
 import appCss from "../index.css?url";
 import type { QueryClient } from "@tanstack/react-query";
 
@@ -30,13 +34,31 @@ export const Route = createRootRouteWithContext<RouterAppContext>()({
         content: "width=device-width, initial-scale=1",
       },
       {
-        title: "My App",
+        name: "theme-color",
+        content: "#000000",
       },
     ],
     links: [
       {
         rel: "stylesheet",
         href: appCss,
+      },
+      {
+        rel: "canonical",
+        href: siteConfig.url,
+      },
+      {
+        rel: "icon",
+        href: "/favicon.ico",
+      },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify([
+          getWebsiteStructuredData(),
+          getArtistStructuredData(),
+        ]),
       },
     ],
   }),
@@ -55,7 +77,7 @@ function RootDocument() {
 					<Header />
 					<Outlet />
 				</div> */}
-        <div>
+        <div className="">
           <Outlet />
         </div>
         <Toaster richColors />
