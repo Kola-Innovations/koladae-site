@@ -15,7 +15,7 @@ const video1 =
 
 const VIDEO_SOURCES = [video1, video2, video3];
 const VIDEO_DURATION = 4000; // 8 seconds per video
-const STATIC_DURATION = 1000; // 2 seconds of static screen
+const STATIC_DURATION = 500; // 2 seconds of static screen
 
 // Pre-generated particle positions (static values to avoid re-renders)
 const PARTICLES = [
@@ -109,7 +109,7 @@ export default function HeroSectionV3({
         setTimeout(() => {
           setShowStatic(false);
           setCurrentVideoIndex((prev) => prev + 1);
-        }, 2000); // Quick flash between videos
+        }, 1000); // Quick flash between videos
       }
     };
 
