@@ -1,32 +1,33 @@
-// Product categories with placeholder images
+import ToatImage from "@/images/toat-bag.png";
+import VinylImage from "@/images/vinyl.png";
+import Keychain from "@/images/keychain-sample.png";
+import MerchSample from "@/images/metch-sample.png";
+
 export const PRODUCT_CATEGORIES = [
   {
     id: "apparel",
     name: "APPAREL",
     description: "Premium streetwear designed for the culture",
-    placeholderImage:
-      "https://images.unsplash.com/photo-1523381210434-271e8be1f52b?q=80&w=800&auto=format",
+    placeholderImage: MerchSample,
+    // "https://images.unsplash.com/photo-1523381210434-271e8be1f52b?q=80&w=800&auto=format",
   },
   {
     id: "totes",
     name: "TOTES",
     description: "Carry the vibe everywhere you go",
-    placeholderImage:
-      "https://images.unsplash.com/photo-1544816155-12df9643f363?q=80&w=800&auto=format",
+    placeholderImage: ToatImage,
   },
   {
     id: "vinyl",
     name: "VINYL",
     description: "Limited edition pressings for true collectors",
-    placeholderImage:
-      "https://images.unsplash.com/photo-1539375665275-f0c630edd0b4?q=80&w=800&auto=format",
+    placeholderImage: VinylImage,
   },
   {
     id: "keychains",
     name: "KEYCHAINS",
     description: "Small pieces, big statements",
-    placeholderImage:
-      "https://images.unsplash.com/photo-1612817159949-195b6eb9e31a?q=80&w=800&auto=format",
+    placeholderImage: Keychain,
   },
 ] as const;
 

@@ -70,7 +70,7 @@ export default function ShopComingSoonCombined({
           style={{ opacity: loaded ? 1 : 0 }}
         >
           {/* Top Section - Artist Name */}
-          <div
+          {/* <div
             className="flex w-full flex-col items-center pt-4 opacity-0 animate-fade-in-up"
             style={{
               animationDelay: "0.2s",
@@ -80,7 +80,7 @@ export default function ShopComingSoonCombined({
             <h1 className="text-center text-[clamp(1.5rem,4vw,2.5rem)] font-bold tracking-[0.3em] text-white">
               {artistName}
             </h1>
-          </div>
+          </div> */}
 
           {/* Navigation */}
           <MainNav />
@@ -99,6 +99,9 @@ export default function ShopComingSoonCombined({
               Exclusive merch dropping soon
             </p>
           </motion.div>
+          <div className="mt-8">
+            <EmailSignupSocials buttonTitle="Get Notified" hideSocials />
+          </div>
 
           {/* Polaroid Grid */}
           <div className="relative mx-auto mt-6 flex w-full max-w-4xl flex-1 items-center justify-center sm:mt-8">
@@ -218,11 +221,11 @@ export default function ShopComingSoonCombined({
         return (
           <section
             key={category.id}
-            className="relative flex min-h-screen flex-col md:flex-row"
+            className="relative flex h-[70vh] min-h-[500px] flex-col md:flex-row"
           >
             {/* Image Panel */}
             <motion.div
-              className={`relative h-[40vh] w-full overflow-hidden md:sticky md:top-0 md:h-screen md:w-[55%] ${
+              className={`relative h-[35vh] w-full overflow-hidden md:h-full md:w-[55%] ${
                 isReversed ? "md:order-2" : "md:order-1"
               }`}
               initial={{ opacity: 0 }}
@@ -233,7 +236,7 @@ export default function ShopComingSoonCombined({
               <img
                 src={category.placeholderImage}
                 alt={category.name}
-                className="h-full w-full object-cover opacity-35 contrast-[1.1] saturate-[0.6]"
+                className="h-full w-full object-cover opacity-75 contrast-[1.1] saturate-[0.6]"
                 loading="lazy"
               />
               {/* Gradient overlays */}
@@ -249,7 +252,7 @@ export default function ShopComingSoonCombined({
 
             {/* Content Panel */}
             <div
-              className={`relative flex w-full flex-col justify-center px-8 py-12 md:min-h-screen md:w-[45%] md:px-12 ${
+              className={`relative flex w-full flex-col justify-center px-8 py-12 md:h-full md:w-[45%] md:px-12 ${
                 isReversed ? "md:order-1" : "md:order-2"
               }`}
             >
