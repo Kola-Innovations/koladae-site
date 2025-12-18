@@ -14,6 +14,7 @@ import { Route as ShopRouteImport } from './routes/shop'
 import { Route as PressKitRouteImport } from './routes/press-kit'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as PressReleaseKeepRollingRouteImport } from './routes/press-release/keep-rolling'
 import { Route as ApiRpcSplatRouteImport } from './routes/api/rpc/$'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
@@ -41,6 +42,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PressReleaseKeepRollingRoute = PressReleaseKeepRollingRouteImport.update({
+  id: '/press-release/keep-rolling',
+  path: '/press-release/keep-rolling',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiRpcSplatRoute = ApiRpcSplatRouteImport.update({
   id: '/api/rpc/$',
   path: '/api/rpc/$',
@@ -53,6 +59,7 @@ export interface FileRoutesByFullPath {
   '/press-kit': typeof PressKitRoute
   '/shop': typeof ShopRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/press-release/keep-rolling': typeof PressReleaseKeepRollingRoute
   '/api/rpc/$': typeof ApiRpcSplatRoute
 }
 export interface FileRoutesByTo {
@@ -61,6 +68,7 @@ export interface FileRoutesByTo {
   '/press-kit': typeof PressKitRoute
   '/shop': typeof ShopRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/press-release/keep-rolling': typeof PressReleaseKeepRollingRoute
   '/api/rpc/$': typeof ApiRpcSplatRoute
 }
 export interface FileRoutesById {
@@ -70,6 +78,7 @@ export interface FileRoutesById {
   '/press-kit': typeof PressKitRoute
   '/shop': typeof ShopRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/press-release/keep-rolling': typeof PressReleaseKeepRollingRoute
   '/api/rpc/$': typeof ApiRpcSplatRoute
 }
 export interface FileRouteTypes {
@@ -80,9 +89,17 @@ export interface FileRouteTypes {
     | '/press-kit'
     | '/shop'
     | '/sitemap.xml'
+    | '/press-release/keep-rolling'
     | '/api/rpc/$'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/contact' | '/press-kit' | '/shop' | '/sitemap.xml' | '/api/rpc/$'
+  to:
+    | '/'
+    | '/contact'
+    | '/press-kit'
+    | '/shop'
+    | '/sitemap.xml'
+    | '/press-release/keep-rolling'
+    | '/api/rpc/$'
   id:
     | '__root__'
     | '/'
@@ -90,6 +107,7 @@ export interface FileRouteTypes {
     | '/press-kit'
     | '/shop'
     | '/sitemap.xml'
+    | '/press-release/keep-rolling'
     | '/api/rpc/$'
   fileRoutesById: FileRoutesById
 }
@@ -99,6 +117,7 @@ export interface RootRouteChildren {
   PressKitRoute: typeof PressKitRoute
   ShopRoute: typeof ShopRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  PressReleaseKeepRollingRoute: typeof PressReleaseKeepRollingRoute
   ApiRpcSplatRoute: typeof ApiRpcSplatRoute
 }
 
@@ -139,6 +158,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/press-release/keep-rolling': {
+      id: '/press-release/keep-rolling'
+      path: '/press-release/keep-rolling'
+      fullPath: '/press-release/keep-rolling'
+      preLoaderRoute: typeof PressReleaseKeepRollingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/rpc/$': {
       id: '/api/rpc/$'
       path: '/api/rpc/$'
@@ -155,6 +181,7 @@ const rootRouteChildren: RootRouteChildren = {
   PressKitRoute: PressKitRoute,
   ShopRoute: ShopRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  PressReleaseKeepRollingRoute: PressReleaseKeepRollingRoute,
   ApiRpcSplatRoute: ApiRpcSplatRoute,
 }
 export const routeTree = rootRouteImport

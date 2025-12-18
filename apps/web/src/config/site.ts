@@ -1,4 +1,5 @@
-import ContactImage from "@/images/resto_blue_flip2.png";
+// import ContactImage from "@/images/resto_blue_flip2.png";
+import KeepRollingArtwork from "@/images/keep-rolling-artwork.png";
 import YeaCoverArt from "@/images/yea_cover.jpg";
 import YeaYeaVid from "@/videos/intro-dimsum.mp4";
 import anabellaVid from "@/videos/anabella_cover_vid.mp4";
@@ -13,6 +14,7 @@ export interface Release {
   description: string;
   artists: string[];
   releaseYear: number;
+  releaseDate?: string;
   links: {
     // use this as presave link if isReleased is false
     all: string;
@@ -26,12 +28,13 @@ export interface Release {
 }
 export const releases: Release[] = [
   {
-    releaseYear: 2025,
+    releaseYear: 2026,
+    releaseDate: "2026-01-30",
     title: "Keep Rolling",
     rotatingWords: ["KEEP", "ON", "ROLLING"],
     // presaveUrl: "", // UPDATE with actual presave link
     isReleased: false,
-    primaryPhoto: ContactImage,
+    primaryPhoto: KeepRollingArtwork,
     isCurrent: true,
     displayOnPdf: true,
     description: `I wrote this song a couple weeks before surgery to remove tumours after a thyroid cancer diagnosis. 
@@ -105,13 +108,13 @@ Lyrically, the song offers a tongue-in-cheek look at the fantasy of “making it
 export const siteConfig = {
   // Basic Info
   name: "KOLADAE",
-  tagline: "R&B Artist",
+  tagline: "Afro fusion Artist, Songwriter & Producer",
   description:
-    "Rising R&B artist blending soulful melodies with contemporary beats. Listen to new music, watch videos, and join the journey.",
+    "Koladae is a Nigerian-born Canadian Afrobeats and R&B artist blending Afro-diasporic rhythms with modern soul, retro textures, and emotionally driven songwriting.",
 
   // URLs - UPDATE THIS
   url: "https://koladae.com",
-  ogImage: "/og-image.jpg",
+  ogImage: releases.filter((release) => release.isCurrent)[0].primaryPhoto,
 
   // Social & Streaming Links - UPDATE THESE
   socials: {

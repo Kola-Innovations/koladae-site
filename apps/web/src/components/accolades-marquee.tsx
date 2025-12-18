@@ -37,7 +37,7 @@ const defaultFeaturedQuotes: PressQuote[] = [
     quote:
       "One of our favourite new discoveries, and one of the most stunning debuts of the year.",
     publication: "Complex",
-    articleTitle: "Best Canadian EP's of 2024",
+    articleTitle: "",
     url: "#",
   },
   {

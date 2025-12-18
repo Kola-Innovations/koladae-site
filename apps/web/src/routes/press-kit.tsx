@@ -13,9 +13,10 @@ import PressKitHero from "@/components/press-kit-hero";
 import SongSection from "@/components/song-section";
 // import SongSectionAlbum from "@/components/song-section-album";
 import SongSectionHero from "@/components/song-section-hero";
-import SongSectionStacked from "@/components/song-section-stacked";
+// import SongSectionStacked from "@/components/song-section-stacked";
 import { siteConfig, releases } from "@/config/site";
 import { seo } from "@/utils/seo";
+import MeHeadphones from "@/images/me-headphones.png";
 
 import { createFileRoute } from "@tanstack/react-router";
 import restoblue from "@/images/resto_blue_flip2.png";
@@ -69,6 +70,7 @@ function RouteComponent() {
         backgroundVideo={track2?.primaryVideo}
         description={track2?.description}
         listenUrl={track2?.links.all}
+        overlayOpacity={0.2}
       />
       {/* <SongSection
         videoUrl={video3}
@@ -77,16 +79,20 @@ function RouteComponent() {
         // darkBgColor="#8b7d6b"
       /> */}
 
-      <SongSectionStacked
-        headerVideo={track3.primaryVideo}
-        coverImage={track3.primaryPhoto}
+      <SongSection
+        // headerVideo={track3.primaryVideo}
+        videoUrl={track3.primaryVideo}
+        // coverImage={track3.primaryPhoto}
         title={track3.title}
         description={track3.description.split("\n\n")}
-        releaseDate={track3.releaseYear.toString()}
-        artist={track3.artists.join(", ")}
-        streamingLinks={track3.links}
+        // releaseDate={track3.releaseYear.toString()}
+        // artist={track3.artists.join(", ")}
+        // streamingLinks={track3.links}
+        reversed
+        videoOpacity={0.5}
+        listenUrl={track3.links.all}
       />
-      <ListenDark subtitle="To Koladae Everywhere" />
+      <ListenDark imageUrl={MeHeadphones} subtitle="To Koladae Everywhere" />
       {/* <ListenMarquee /> */}
       {/* <SongSectionAlbum /> */}
       {/* <AccoladesSplit /> */}
