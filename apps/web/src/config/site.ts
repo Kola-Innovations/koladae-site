@@ -108,9 +108,9 @@ Lyrically, the song offers a tongue-in-cheek look at the fantasy of “making it
 export const siteConfig = {
   // Basic Info
   name: "KOLADAE",
-  tagline: "R&B Artist",
+  tagline: "Afro fusion Artist, Songwriter & Producer",
   description:
-    "Rising R&B artist blending soulful melodies with contemporary beats. Listen to new music, watch videos, and join the journey.",
+    "Koladae is a Nigerian-born Canadian Afrobeats and R&B artist blending Afro-diasporic rhythms with modern soul, retro textures, and emotionally driven songwriting.",
 
   // URLs - UPDATE THIS
   url: "https://koladae.com",
