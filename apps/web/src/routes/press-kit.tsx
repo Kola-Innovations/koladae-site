@@ -77,14 +77,18 @@ function RouteComponent() {
         // darkBgColor="#8b7d6b"
       /> */}
 
-      <SongSectionStacked
-        headerVideo={track3.primaryVideo}
-        coverImage={track3.primaryPhoto}
+      <SongSection
+        // headerVideo={track3.primaryVideo}
+        videoUrl={track3.primaryVideo}
+        // coverImage={track3.primaryPhoto}
         title={track3.title}
         description={track3.description.split("\n\n")}
-        releaseDate={track3.releaseYear.toString()}
-        artist={track3.artists.join(", ")}
-        streamingLinks={track3.links}
+        // releaseDate={track3.releaseYear.toString()}
+        // artist={track3.artists.join(", ")}
+        // streamingLinks={track3.links}
+        reversed
+        videoOpacity={0.5}
+        listenUrl={track3.links.all}
       />
       <ListenDark subtitle="To Koladae Everywhere" />
       {/* <ListenMarquee /> */}

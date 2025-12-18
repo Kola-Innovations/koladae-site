@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@koladae-site/api": "workspace:*",
+    "@mux/mux-player-react": "^3.10.1",
     "@orpc/client": "catalog:",
     "@orpc/openapi": "catalog:",
     "@orpc/server": "catalog:",

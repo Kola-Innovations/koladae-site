@@ -1,16 +1,21 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import video1 from "@/videos/rolling_press.mp4";
+// import video1 from "@/videos/rolling_press.mp4";
 import video2 from "@/videos/yea-lean-with-it.mp4";
 import video3 from "@/videos/intro-dimsum.mp4";
 // import { Link } from "@tanstack/react-router";
 import MainNav from "./nav";
 import EmailSignupSocials from "./email-signup-socials";
 import { siteConfig } from "@/config/site";
+// import MuxPlayer from "@mux/mux-player-react";
+
+const video1 =
+  "https://stream.mux.com/SVldDkmBAGk9sHvCK4NdKwvm02YJ43dq16uQx00BJN5Y4.m3u8";
+// "https://stream.mux.com/SVldDkmBAGk9sHvCK4NdKwvm02YJ43dq16uQx00BJN5Y4";
 
 const VIDEO_SOURCES = [video1, video2, video3];
 const VIDEO_DURATION = 4000; // 8 seconds per video
-const STATIC_DURATION = 2000; // 2 seconds of static screen
+const STATIC_DURATION = 1000; // 2 seconds of static screen
 
 // Pre-generated particle positions (static values to avoid re-renders)
 const PARTICLES = [
@@ -797,6 +802,19 @@ export default function HeroSectionV3({
             transition={{ duration: 0.2 }}
           >
             <source src={VIDEO_SOURCES[currentVideoIndex]} type="video/mp4" />
+            {/* <MuxPlayer
+              playbackId={VIDEO_SOURCES[currentVideoIndex]}
+              autoPlay="muted"
+              muted
+              loop
+              streamType="on-demand"
+              style={{
+                width: "100%",
+                height: "100%",
+                "--controls": "none",
+                "--media-object-fit": "cover",
+              }}
+            /> */}
           </motion.video>
         )}
       </AnimatePresence>
