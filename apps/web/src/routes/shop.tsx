@@ -5,10 +5,11 @@
 // import ShopComingSoon from "@/components/shop-coming-soon";
 
 // Variation 1: Rotating category words in the center bar
-import ShopComingSoonPolaroid from "@/components/shop/shop-coming-soon-polaroid";
-import ShopComingSoon from "@/components/shop/shop-coming-soon-rotating";
-import ShopComingSoonSplit from "@/components/shop/shop-coming-soon-split";
-import ShopComingSoonVinyl from "@/components/shop/shop-coming-soon-vinyl";
+import ShopComingSoonCombined from "@/components/shop/shop-coming-soon-combined";
+// import ShopComingSoonPolaroid from "@/components/shop/shop-coming-soon-polaroid";
+// import ShopComingSoon from "@/components/shop/shop-coming-soon-rotating";
+// import ShopComingSoonSplit from "@/components/shop/shop-coming-soon-split";
+// import ShopComingSoonVinyl from "@/components/shop/shop-coming-soon-vinyl";
 
 // Variation 2: Polaroid-style product grid
 // import ShopComingSoon from "@/components/shop/shop-coming-soon-polaroid";
@@ -38,10 +39,11 @@ export const Route = createFileRoute("/shop")({
 function RouteComponent() {
   return (
     <>
-      <ShopComingSoon />
-      <ShopComingSoonPolaroid />
+      {/* <ShopComingSoon /> */}
+      <ShopComingSoonCombined />
+      {/* <ShopComingSoonPolaroid />
       <ShopComingSoonVinyl />
-      <ShopComingSoonSplit />
+      <ShopComingSoonSplit /> */}
     </>
   );
 }
