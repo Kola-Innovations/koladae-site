@@ -1,176 +1,17 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "motion/react";
 import MainNav from "../nav";
 import EmailSignupSocials from "../email-signup-socials";
-import { VHS_STYLES, VHSOverlay } from "./shared/vhs-effects";
 import {
-  PRODUCT_CATEGORIES,
-  BUTTERFLIES,
-  ACCENT_COLOR,
-} from "./shared/shop-constants";
+  Butterfly,
+  SpinningVinyl,
+  VHSOverlay,
+} from "./shared/vhs-effects";
+import { BUTTERFLIES, PRODUCT_CATEGORIES } from "./shared/shop-constants";
 
 interface ShopComingSoonVinylProps {
   artistName?: string;
 }
-
-const VINYL_STYLES = `
-  /* Main vinyl record - larger, centered */
-  .vinyl-main {
-    width: clamp(200px, 45vw, 320px);
-    height: clamp(200px, 45vw, 320px);
-    border-radius: 50%;
-    background: radial-gradient(
-      circle at center,
-      #1a1a1a 0%,
-      #1a1a1a 12%,
-      #333 13%,
-      #111 14%,
-      #222 25%,
-      #111 26%,
-      #333 38%,
-      #111 39%,
-      #222 52%,
-      #111 53%,
-      #333 66%,
-      #111 67%,
-      #222 80%,
-      #111 81%,
-      #1a1a1a 92%,
-      #333 100%
-    );
-    box-shadow:
-      0 0 0 4px #111,
-      0 0 0 8px #333,
-      0 0 40px rgba(0, 0, 0, 0.6),
-      0 20px 60px rgba(0, 0, 0, 0.4);
-    animation: spinVinylMain 10s linear infinite;
-    position: relative;
-  }
-
-  .vinyl-main::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 35%;
-    height: 35%;
-    border-radius: 50%;
-    background: radial-gradient(
-      circle,
-      #c4956a 0%,
-      #a67c52 40%,
-      #8b6b4a 60%,
-      #1a1a1a 61%,
-      #1a1a1a 100%
-    );
-    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
-  }
-
-  .vinyl-main::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 8%;
-    height: 8%;
-    border-radius: 50%;
-    background: #0a0a0a;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
-  }
-
-  @keyframes spinVinylMain {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-  }
-
-  /* Vinyl label text */
-  .vinyl-label-text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: clamp(8px, 2vw, 12px);
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    color: rgba(255, 255, 255, 0.9);
-    text-transform: uppercase;
-    white-space: nowrap;
-    pointer-events: none;
-    z-index: 2;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
-  }
-
-  /* Category pills */
-  .category-pill {
-    padding: 10px 20px;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    background: transparent;
-    color: rgba(255, 255, 255, 0.8);
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    transition: all 0.3s ease;
-    cursor: default;
-  }
-
-  .category-pill:hover {
-    border-color: rgba(255, 255, 255, 0.6);
-    color: white;
-    background: rgba(255, 255, 255, 0.05);
-  }
-
-  /* Floating small vinyls in background */
-  .vinyl-float {
-    position: absolute;
-    border-radius: 50%;
-    background: radial-gradient(
-      circle at center,
-      #1a1a1a 0%,
-      #1a1a1a 15%,
-      #333 16%,
-      #111 17%,
-      #222 30%,
-      #111 31%,
-      #333 45%,
-      #111 46%,
-      #1a1a1a 90%
-    );
-    opacity: 0.4;
-    animation: floatVinyl ease-in-out infinite;
-  }
-
-  .vinyl-float::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 30%;
-    height: 30%;
-    border-radius: 50%;
-    background: #c4956a;
-    opacity: 0.7;
-  }
-
-  @keyframes floatVinyl {
-    0%, 100% { transform: translateY(0) rotate(0deg); }
-    50% { transform: translateY(-20px) rotate(180deg); }
-  }
-
-  /* Background product images - faded corners */
-  .bg-product {
-    position: absolute;
-    width: 200px;
-    height: 200px;
-    object-fit: cover;
-    opacity: 0.08;
-    filter: grayscale(100%);
-    pointer-events: none;
-  }
-`;
 
 export default function ShopComingSoonVinyl({
   artistName = "KOLADAE",
@@ -182,19 +23,14 @@ export default function ShopComingSoonVinyl({
   }, []);
 
   return (
-    <div className="relative min-h-screen w-full overflow-hidden bg-black">
-      <style>
-        {VHS_STYLES}
-        {VINYL_STYLES}
-      </style>
-
+    <div className="relative min-h-screen w-full overflow-hidden bg-black font-sans">
       {/* Background product images in corners */}
       {PRODUCT_CATEGORIES.map((category, index) => (
         <img
           key={category.id}
           src={category.placeholderImage}
           alt=""
-          className="bg-product"
+          className="pointer-events-none absolute h-[200px] w-[200px] object-cover opacity-[0.08] grayscale"
           style={{
             top: index < 2 ? "5%" : "auto",
             bottom: index >= 2 ? "5%" : "auto",
@@ -207,85 +43,69 @@ export default function ShopComingSoonVinyl({
 
       {/* Floating small vinyls */}
       <div
-        className="vinyl-float"
+        className="animate-float-vinyl absolute h-[60px] w-[60px] rounded-full opacity-40"
         style={{
           left: "8%",
           top: "20%",
-          width: "60px",
-          height: "60px",
           animationDuration: "6s",
+          background: `radial-gradient(circle at center, #1a1a1a 0%, #1a1a1a 15%, #333 16%, #111 17%, #222 30%, #111 31%, #333 45%, #111 46%, #1a1a1a 90%)`,
         }}
-      />
+      >
+        <div className="absolute left-1/2 top-1/2 h-[30%] w-[30%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#c4956a] opacity-70" />
+      </div>
       <div
-        className="vinyl-float"
+        className="animate-float-vinyl absolute h-[45px] w-[45px] rounded-full opacity-40"
         style={{
           right: "10%",
           top: "15%",
-          width: "45px",
-          height: "45px",
           animationDuration: "8s",
           animationDelay: "1s",
+          background: `radial-gradient(circle at center, #1a1a1a 0%, #1a1a1a 15%, #333 16%, #111 17%, #222 30%, #111 31%, #333 45%, #111 46%, #1a1a1a 90%)`,
         }}
-      />
+      >
+        <div className="absolute left-1/2 top-1/2 h-[30%] w-[30%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#c4956a] opacity-70" />
+      </div>
       <div
-        className="vinyl-float"
+        className="animate-float-vinyl absolute h-[55px] w-[55px] rounded-full opacity-40"
         style={{
           right: "12%",
           bottom: "25%",
-          width: "55px",
-          height: "55px",
           animationDuration: "7s",
           animationDelay: "0.5s",
+          background: `radial-gradient(circle at center, #1a1a1a 0%, #1a1a1a 15%, #333 16%, #111 17%, #222 30%, #111 31%, #333 45%, #111 46%, #1a1a1a 90%)`,
         }}
-      />
+      >
+        <div className="absolute left-1/2 top-1/2 h-[30%] w-[30%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#c4956a] opacity-70" />
+      </div>
 
       {/* VHS Effects */}
       <VHSOverlay />
 
       {/* Butterflies */}
       {BUTTERFLIES.map((butterfly) => (
-        <div
+        <Butterfly
           key={butterfly.id}
-          className="butterfly"
-          style={{
-            left: `${butterfly.left}%`,
-            top: `${butterfly.top}%`,
-            animationDelay: `${butterfly.delay}s`,
-            animationDuration: `${butterfly.duration}s`,
-            zIndex: 25,
-          }}
-        >
-          <div className="butterfly-wing left" style={{ animationDuration: "0.3s" }} />
-          <div className="butterfly-wing right" style={{ animationDuration: "0.3s" }} />
-          <div className="butterfly-body" />
-        </div>
+          left={butterfly.left}
+          top={butterfly.top}
+          delay={butterfly.delay}
+          duration={butterfly.duration}
+        />
       ))}
 
       {/* Content Container */}
       <div
-        className="shop-container relative z-40 flex min-h-screen flex-col items-center px-4 py-12 sm:px-8"
-        style={{
-          opacity: loaded ? 1 : 0,
-          transition: "opacity 0.8s ease",
-        }}
+        className="relative z-40 flex min-h-screen flex-col items-center px-4 py-12 transition-opacity duration-800 sm:px-8"
+        style={{ opacity: loaded ? 1 : 0 }}
       >
         {/* Top Section - Artist Name */}
         <div
-          className="flex w-full flex-col items-center pt-4"
+          className="flex w-full flex-col items-center pt-4 opacity-0 animate-fade-in-up"
           style={{
-            animation: loaded ? "fadeInUp 1s ease forwards" : "none",
             animationDelay: "0.2s",
-            opacity: 0,
             animationFillMode: "forwards",
           }}
         >
-          <h1
-            className="text-center font-bold tracking-widest text-white"
-            style={{
-              fontSize: "clamp(1.5rem, 4vw, 2.5rem)",
-              letterSpacing: "0.3em",
-            }}
-          >
+          <h1 className="text-center text-[clamp(1.5rem,4vw,2.5rem)] font-bold tracking-[0.3em] text-white">
             {artistName}
           </h1>
         </div>
@@ -302,10 +122,7 @@ export default function ShopComingSoonVinyl({
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.5 }}
           >
-            <span
-              className="font-medium tracking-widest"
-              style={{ color: ACCENT_COLOR, fontSize: "clamp(0.7rem, 2vw, 0.9rem)" }}
-            >
+            <span className="text-[clamp(0.7rem,2vw,0.9rem)] font-medium tracking-widest text-[#c4956a]">
               SHOP COMING SOON
             </span>
           </motion.div>
@@ -317,9 +134,11 @@ export default function ShopComingSoonVinyl({
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.7 }}
           >
-            <div className="vinyl-main">
-              <span className="vinyl-label-text">{artistName}</span>
-            </div>
+            <SpinningVinyl size="medium" />
+            {/* Label text */}
+            <span className="pointer-events-none absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap text-[clamp(8px,2vw,12px)] font-bold uppercase tracking-[0.1em] text-white/90">
+              {artistName}
+            </span>
           </motion.div>
 
           {/* Category Pills */}
@@ -332,7 +151,7 @@ export default function ShopComingSoonVinyl({
             {PRODUCT_CATEGORIES.map((category, index) => (
               <motion.span
                 key={category.id}
-                className="category-pill"
+                className="cursor-default border border-white/30 bg-transparent px-5 py-2.5 text-[11px] font-medium uppercase tracking-[0.15em] text-white/80 transition-all duration-300 hover:border-white/60 hover:bg-white/5 hover:text-white"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, delay: 1.2 + index * 0.1 }}

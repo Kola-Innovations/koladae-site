@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import MainNav from "../nav";
 import EmailSignupSocials from "../email-signup-socials";
-import { VHS_STYLES, VHSOverlay, BackgroundImage } from "./shared/vhs-effects";
+import { VHSOverlay, BackgroundImage, GrainyBar } from "./shared/vhs-effects";
 import { ROTATING_WORDS } from "./shared/shop-constants";
 
 interface ShopComingSoonRotatingProps {
@@ -44,9 +44,7 @@ export default function ShopComingSoonRotating({
   }, [currentWordIndex, barsReady]);
 
   return (
-    <div className="relative h-screen w-full overflow-hidden bg-black">
-      <style>{VHS_STYLES}</style>
-
+    <div className="relative h-screen w-full overflow-hidden bg-black font-sans">
       {/* Background Image */}
       <BackgroundImage src={backgroundImage} opacity={imageOpacity} />
 
@@ -55,29 +53,18 @@ export default function ShopComingSoonRotating({
 
       {/* Content Container */}
       <div
-        className="shop-container relative z-40 flex h-full flex-col items-center justify-between px-8 py-12"
-        style={{
-          opacity: loaded ? 1 : 0,
-          transition: "opacity 0.8s ease",
-        }}
+        className="relative z-40 flex h-full flex-col items-center justify-between px-8 py-12 transition-opacity duration-[800ms]"
+        style={{ opacity: loaded ? 1 : 0 }}
       >
         {/* Top Section - Artist Name */}
         <div
-          className="flex w-full flex-col items-center pt-4"
+          className="flex w-full flex-col items-center pt-4 opacity-0 animate-fade-in-up"
           style={{
-            animation: loaded ? "fadeInUp 1s ease forwards" : "none",
             animationDelay: "0.2s",
-            opacity: 0,
             animationFillMode: "forwards",
           }}
         >
-          <h1
-            className="text-center font-bold tracking-widest text-white"
-            style={{
-              fontSize: "clamp(1.5rem, 4vw, 2.5rem)",
-              letterSpacing: "0.3em",
-            }}
-          >
+          <h1 className="text-center text-[clamp(1.5rem,4vw,2.5rem)] font-bold tracking-[0.3em] text-white">
             {artistName}
           </h1>
         </div>
@@ -87,14 +74,10 @@ export default function ShopComingSoonRotating({
 
         {/* Center Section - The Bar with Rotating Words */}
         <div className="flex flex-col items-center gap-6">
-          <div
-            className="relative flex w-screen items-center justify-center"
-            style={{ height: "140px" }}
-          >
+          <div className="relative flex h-[140px] w-screen items-center justify-center">
             {/* Left Bar Half */}
             <motion.div
-              className="grainy-bar absolute left-0 h-full"
-              style={{ width: "50%" }}
+              className="absolute left-0 h-full w-1/2"
               initial={{ x: "-100%" }}
               animate={loaded ? { x: 0 } : { x: "-100%" }}
               transition={{
@@ -103,26 +86,22 @@ export default function ShopComingSoonRotating({
                 delay: 0.3,
               }}
             >
-              {/* COMING label - desktop */}
-              <motion.span
-                className="absolute left-8 top-1/2 hidden -translate-y-1/2 font-bold uppercase tracking-widest sm:block"
-                style={{
-                  fontSize: "clamp(1.2rem, 3vw, 2rem)",
-                  color: "rgba(255, 250, 245, 0.9)",
-                  letterSpacing: "0.2em",
-                }}
-                initial={{ opacity: 0 }}
-                animate={barsReady ? { opacity: 1 } : { opacity: 0 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-              >
-                COMING
-              </motion.span>
+              <GrainyBar className="h-full w-full">
+                {/* COMING label - desktop */}
+                <motion.span
+                  className="absolute left-8 top-1/2 hidden -translate-y-1/2 text-[clamp(1.2rem,3vw,2rem)] font-bold uppercase tracking-[0.2em] text-white/90 sm:block"
+                  initial={{ opacity: 0 }}
+                  animate={barsReady ? { opacity: 1 } : { opacity: 0 }}
+                  transition={{ duration: 0.5, delay: 0.2 }}
+                >
+                  COMING
+                </motion.span>
+              </GrainyBar>
             </motion.div>
 
             {/* Right Bar Half */}
             <motion.div
-              className="grainy-bar absolute right-0 h-full"
-              style={{ width: "50%" }}
+              className="absolute right-0 h-full w-1/2"
               initial={{ x: "100%" }}
               animate={loaded ? { x: 0 } : { x: "100%" }}
               transition={{
@@ -131,38 +110,25 @@ export default function ShopComingSoonRotating({
                 delay: 0.3,
               }}
             >
-              {/* SOON label - desktop */}
-              <motion.span
-                className="absolute right-8 top-1/2 hidden -translate-y-1/2 font-bold uppercase tracking-widest sm:block"
-                style={{
-                  fontSize: "clamp(1.2rem, 3vw, 2rem)",
-                  color: "rgba(255, 250, 245, 0.9)",
-                  letterSpacing: "0.2em",
-                }}
-                initial={{ opacity: 0 }}
-                animate={barsReady ? { opacity: 1 } : { opacity: 0 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-              >
-                SOON
-              </motion.span>
+              <GrainyBar className="h-full w-full">
+                {/* SOON label - desktop */}
+                <motion.span
+                  className="absolute right-8 top-1/2 hidden -translate-y-1/2 text-[clamp(1.2rem,3vw,2rem)] font-bold uppercase tracking-[0.2em] text-white/90 sm:block"
+                  initial={{ opacity: 0 }}
+                  animate={barsReady ? { opacity: 1 } : { opacity: 0 }}
+                  transition={{ duration: 0.5, delay: 0.2 }}
+                >
+                  SOON
+                </motion.span>
+              </GrainyBar>
             </motion.div>
 
             {/* Rotating Category Word - Centered (desktop) */}
-            <div
-              className="absolute left-1/2 top-1/2 z-10 hidden -translate-x-1/2 -translate-y-1/2 sm:block"
-              style={{ minWidth: "300px", textAlign: "center" }}
-            >
+            <div className="absolute left-1/2 top-1/2 z-10 hidden min-w-[300px] -translate-x-1/2 -translate-y-1/2 text-center sm:block">
               <AnimatePresence mode="wait">
                 <motion.span
                   key={currentWordIndex}
-                  style={{
-                    fontSize: "clamp(2rem, 5vw, 4rem)",
-                    fontWeight: 800,
-                    letterSpacing: "0.05em",
-                    color: "white",
-                    textTransform: "uppercase",
-                    display: "inline-block",
-                  }}
+                  className="inline-block text-[clamp(2rem,5vw,4rem)] font-extrabold uppercase tracking-[0.05em] text-white"
                   initial={{ opacity: 0 }}
                   animate={barsReady ? { opacity: 1 } : { opacity: 0 }}
                   exit={{ opacity: 0 }}
@@ -177,12 +143,7 @@ export default function ShopComingSoonRotating({
             <div className="absolute left-1/2 top-1/2 z-10 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-1 sm:hidden">
               {/* COMING - mobile */}
               <motion.span
-                className="font-bold uppercase tracking-widest"
-                style={{
-                  fontSize: "clamp(0.7rem, 3vw, 1rem)",
-                  color: "rgba(255, 250, 245, 0.9)",
-                  letterSpacing: "0.2em",
-                }}
+                className="text-[clamp(0.7rem,3vw,1rem)] font-bold uppercase tracking-[0.2em] text-white/90"
                 initial={{ opacity: 0 }}
                 animate={barsReady ? { opacity: 1 } : { opacity: 0 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
@@ -194,14 +155,7 @@ export default function ShopComingSoonRotating({
               <AnimatePresence mode="wait">
                 <motion.span
                   key={currentWordIndex}
-                  style={{
-                    fontSize: "clamp(1.8rem, 8vw, 2.5rem)",
-                    fontWeight: 800,
-                    letterSpacing: "0.05em",
-                    color: "white",
-                    textTransform: "uppercase",
-                    display: "inline-block",
-                  }}
+                  className="inline-block text-[clamp(1.8rem,8vw,2.5rem)] font-extrabold uppercase tracking-[0.05em] text-white"
                   initial={{ opacity: 0 }}
                   animate={barsReady ? { opacity: 1 } : { opacity: 0 }}
                   exit={{ opacity: 0 }}
@@ -213,12 +167,7 @@ export default function ShopComingSoonRotating({
 
               {/* SOON - mobile */}
               <motion.span
-                className="font-bold uppercase tracking-widest"
-                style={{
-                  fontSize: "clamp(0.7rem, 3vw, 1rem)",
-                  color: "rgba(255, 250, 245, 0.9)",
-                  letterSpacing: "0.2em",
-                }}
+                className="text-[clamp(0.7rem,3vw,1rem)] font-bold uppercase tracking-[0.2em] text-white/90"
                 initial={{ opacity: 0 }}
                 animate={barsReady ? { opacity: 1 } : { opacity: 0 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
@@ -231,10 +180,9 @@ export default function ShopComingSoonRotating({
 
         {/* Bottom Section */}
         <div
+          className="opacity-0 animate-fade-in-up"
           style={{
-            animation: loaded ? "fadeInUp 1s ease forwards" : "none",
             animationDelay: "1.5s",
-            opacity: 0,
             animationFillMode: "forwards",
           }}
         >

@@ -38,9 +38,9 @@ export const Route = createFileRoute("/shop")({
 function RouteComponent() {
   return (
     <>
-      {/* <ShopComingSoon /> */}
+      <ShopComingSoon />
       <ShopComingSoonPolaroid />
-      {/* <ShopComingSoonVinyl /> */}
+      <ShopComingSoonVinyl />
       <ShopComingSoonSplit />
     </>
   );
