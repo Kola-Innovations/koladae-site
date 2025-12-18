@@ -1,4 +1,4 @@
-import ContactImage from "@/images/resto_blue_flip2.png";
+// import ContactImage from "@/images/resto_blue_flip2.png";
 import KeepRollingArtwork from "@/images/keep-rolling-artwork.png";
 import YeaCoverArt from "@/images/yea_cover.jpg";
 import YeaYeaVid from "@/videos/intro-dimsum.mp4";
